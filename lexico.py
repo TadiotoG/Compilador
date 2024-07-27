@@ -1,2 +1,3 @@
 class automato_lexico:
-    estados = []
+    def __init__(self):
+        self.estados = []
