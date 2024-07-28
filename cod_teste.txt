@@ -1,0 +1,4 @@
+for 
+{}
+nao_sei_programar = 4;
+""
