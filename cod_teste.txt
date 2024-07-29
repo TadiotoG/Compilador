@@ -1,4 +1,5 @@
-for 
+for
 {}
-nao_sei_programar = 4;
-""
+nao_sei_programar := 4;
+"daada"
+@adasdas
