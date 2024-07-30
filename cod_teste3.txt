@@ -1,0 +1,3 @@
+int 1davi1;
+float 1davi1 := 1.1davisao;
+if my_grade !< grande
