@@ -1,5 +1,4 @@
 for
 {}
-nao_sei_programar := 4;
-"daada"
-@adasdas
+Jacu := 4;
+"Texto entre aspas"@Comentario 123 < ? 
