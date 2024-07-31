@@ -188,7 +188,7 @@ class Automato:
                     state = 9
 
             elif state == 13:
-                if carac in '\n':
+                if carac in "\n" or carac in " ":
                     state = 1
                     self.txt +=  carac
                     self.tokens.append([self.txt, "comentario"])
@@ -199,7 +199,7 @@ class Automato:
                     state = 13
 
             elif state == 15:
-                if carac in "\n":
+                if carac in "\n" or carac in " ":
                     state = 1
                     self.txt +=  carac
                     self.tokens.append([self.txt, "fim_linha"])
