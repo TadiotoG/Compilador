@@ -23,24 +23,18 @@ class Automato:
             
 
     def analyzes_code(self):
-        for string in self.code_enter:
-            print(string)
-            string = string + " "
-            self.automato_rules(string)
+        self.code_enter[-1] += '\n'
+        for linha in range(len(self.code_enter)):
+            self.automato_rules(self.code_enter[linha], linha)
 
-    def print_tokens(self):
-        for token in self.tokens:
-            print("Código encontrado: ", token[0], "    Token: ", token[1], "\n")
-
-    def automato_rules(self, string):
+    def automato_rules(self, string, linha):
         state = 1
         i = 0
         controle = 0
         while i < len(string):
             carac = string[i]
-            print("Carac:" ,carac, "State:" ,state, "Indice :" ,i)
-            # print(carac)
-            # print(state)
+            # print("Carac:" ,carac, "State:" ,state, "Indice :" ,i)
+
             if state == 1: # Para o estado 1 do automato, fazer a regra de todas as transicoes
                 
                 if carac in alphabet_low or carac in alphabet_high:
@@ -114,12 +108,11 @@ class Automato:
                 else:
                     if carac != " " and carac != "\n":
                         self.txt +=  carac
-                        print("Erro no estado ", state, "  caracter:", self.txt, "\n")
+                        print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
                         state = 1
 
 
             elif state == 2:
-                print("entrou")
                 if carac in numbers:
                     self.txt +=  carac
                     state = 2
@@ -128,9 +121,13 @@ class Automato:
                     state = 4
 
                 elif carac in alphabet_low or carac in alphabet_high:
-                    self.txt +=  carac
-                    print("Erro no estado ", state, "  caracter:", self.txt, "\n")
+                    while i < len(string) and (string[i] != ' ' and string[i] != '\n'):
+                        self.txt += string[i]
+                        i+=1
+
+                    print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
                     state = 1
+                    controle = 1
                     
                 else:
                     controle = 1
@@ -149,9 +146,12 @@ class Automato:
                     self.txt +=  carac
                     state = 5
 
-                elif carac in alphabet_low or carac in alphabet_high:
-                    self.txt +=  carac
-                    print("Erro no estado ", state, "  caracter:", self.txt, "\n")
+                elif carac in alphabet_low or carac in alphabet_high:  
+                    while i < len(string) and (string[i] != ' ' and string[i] != '\n'):
+                        self.txt += string[i]
+                        i+=1
+                    print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
+
                     state = 1
                     controle = 1
 
@@ -206,10 +206,15 @@ class Automato:
                     print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
-                else:
-                    self.txt +=  carac
-                    print("Erro no estado ", state, "  caracter:", self.txt, "\n")
+                else:                                        
+                    while i < len(string) and (string[i] != ' ' and string[i] != '\n'):
+                        self.txt += string[i]
+                        i+=1
+
+                    print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
+
                     state = 1
+                    controle = 1
 
             elif state == 18:
                 if carac == "=":
@@ -234,8 +239,10 @@ class Automato:
                     self.txt = ""
 
                 else:
-                    self.txt +=  carac
-                    print("Erro no estado ", state, "  caracter:", self.txt, "\n")
+                    while i < len(string) and (string[i] != ' ' and string[i] != '\n'):
+                        self.txt += string[i]
+                        i+=1
+                    print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
                     state = 1
                     controle = 1
 
@@ -248,8 +255,10 @@ class Automato:
                     self.txt = ""
 
                 else:
-                    self.txt +=  carac
-                    print("Erro no estado ", state, "  caracter:", self.txt, "\n")
+                    while i < len(string) and (string[i] != ' ' and string[i] != '\n'):
+                        self.txt += string[i]
+                        i+=1
+                    print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
                     state = 1
                     controle = 1
                 
@@ -263,4 +272,4 @@ my_lex.read_file("cod_teste2.txt")
 my_lex.analyzes_code()
 
 # my_lex.print_tokens()
-print(my_lex.tokens)
+# print(my_lex.tokens)

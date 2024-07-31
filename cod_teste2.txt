@@ -5,7 +5,7 @@ int pot;
 pot := input();
 
 int mult;
-mult := x;
+mult := davisao; 
 
 for i:=0,i<pot,i++ {
     x := x * mult;
@@ -21,4 +21,4 @@ if x > 100 {
 output("Valor :");
 output(x);
 
-output
+output;
