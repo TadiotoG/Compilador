@@ -1,4 +1,4 @@
 for
 {}
 Jacu := 4;
-"Texto entre aspas"@Comentario 123 < ? 
+"Texto entre aspas" @Comentario 123 < ?

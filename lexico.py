@@ -24,7 +24,8 @@ class Automato:
 
     def analyzes_code(self):
         for string in self.code_enter:
-            # print(string)
+            print(string)
+            string = string + " "
             self.automato_rules(string)
 
     def print_tokens(self):
@@ -37,10 +38,11 @@ class Automato:
         controle = 0
         while i < len(string):
             carac = string[i]
-            # print("Carac:" ,carac, "State:" ,state, "Indice :" ,i)
+            print("Carac:" ,carac, "State:" ,state, "Indice :" ,i)
             # print(carac)
             # print(state)
             if state == 1: # Para o estado 1 do automato, fazer a regra de todas as transicoes
+                
                 if carac in alphabet_low or carac in alphabet_high:
                     self.txt =  carac
                     state = 7
@@ -117,6 +119,7 @@ class Automato:
 
 
             elif state == 2:
+                print("entrou")
                 if carac in numbers:
                     self.txt +=  carac
                     state = 2
@@ -256,7 +259,7 @@ class Automato:
                 controle = 0
 my_lex = Automato()  
 
-my_lex.read_file("cod_teste3.txt")
+my_lex.read_file("cod_teste2.txt")
 my_lex.analyzes_code()
 
 # my_lex.print_tokens()
