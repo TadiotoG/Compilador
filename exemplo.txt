@@ -5,13 +5,13 @@ int pot;
 pot := input();
 
 int mult;
-mult := davisao; 
+mult := 0; 
 
 for i:=0,i<pot,i++ {
     x := x * mult;
 };
 
-if x > 100 {
+if x > -100a {
     output("Numero maior que 100");
 } else {
 

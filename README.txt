@@ -17,3 +17,14 @@ Caso tenha o Python devidamente instalado em sua máquina, realize os seguintes 
     2. Localize o seguinte trecho de código:
         "my_lex.read_file("exemplo.txt")"
     3. Altere para o arquivo desejado.
+
+
+_ tokens juntos é correto 12A
+
+- salva linha junto com tokens
+- ++  e  -- reconhecer juntos
+- tratamento da string abra e fecha " "
+- int -> id tipo int
+- indetificar as palavras reservadas.
+
+
