@@ -1,2 +1,1 @@
-1. sdfajifasdiasdfi
-davi := 30; @Haja comentarios ioafsdihoasdfoihadfs
+and boolean else float for if input int not or output string while
