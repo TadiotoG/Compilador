@@ -1,5 +1,3 @@
-my_string = "OPAAA"
+my_string = "1"
 
-for i in my_string:
-    print(i)
-
+print(my_string.isdigit())

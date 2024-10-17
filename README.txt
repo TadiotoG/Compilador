@@ -25,6 +25,6 @@ _ tokens juntos é correto 12A
 - ++  e  -- reconhecer juntos
 - tratamento da string abra e fecha " "
 - int -> id tipo int
-- indetificar as palavras reservadas.
+- indentificar as palavras reservadas.
 
 
