@@ -1,13 +1,13 @@
-int 12x;
+int x;
 x := input();
 
-floata pot;
+float pot;
 pot := input();
 
 boolean mult;
 mult := 0; 
 
-for i:=0,i<pot,i++ {
+for i := 0 , i < pot,i++ {
     x := x * mult;
 };
 
@@ -20,5 +20,5 @@ if x > -100 {
 
 output("Valor :");
 output(x);
-
+@ adfasdasad12312
 output;
