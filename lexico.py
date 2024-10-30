@@ -59,6 +59,10 @@ class Automato:
                     self.txt = carac
                     state = 70
 
+                elif carac == "+":
+                    self.txt = carac
+                    state = 50
+
                 elif carac == "-":
                     self.txt = carac
                     state = 52
@@ -301,6 +305,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 27:
                 if carac == "l":
                     state = 33
@@ -314,6 +325,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 28:
                 if carac == "t":
                     state = 38
@@ -323,6 +341,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 29:
                 if carac == "o":
                     state = 44
@@ -331,6 +356,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 30:
                 if carac == "t":
@@ -344,6 +376,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 31:
                 if not (carac in full_alphabet or carac in numbers):
@@ -366,6 +405,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 34:
                 if carac == "a":
                     state = 35
@@ -375,6 +421,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 35:
                 if carac == "t":
                     state = 36
@@ -383,6 +436,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 36:
                 if not (carac in full_alphabet or carac in numbers):
@@ -405,6 +465,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 39:
                 if carac == "i":
                     state = 40
@@ -413,6 +480,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 40:
                 if carac == "n":
@@ -423,6 +497,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 41:
                 if carac == "g":
                     state = 42
@@ -431,6 +512,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 42:
                 if not (carac in full_alphabet or carac in numbers):
@@ -453,6 +541,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 45:
                 if carac == "l":
                     state = 46
@@ -461,6 +556,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 46:
                 if carac == "e":
@@ -471,6 +573,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 47:
                 if carac == "a":
                     state = 48
@@ -480,6 +589,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 48:
                 if carac == "n":
                     state = 49
@@ -488,6 +604,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 49:
                 if not (carac in full_alphabet or carac in numbers):
@@ -584,6 +707,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 62:
                 if not (carac in full_alphabet or carac in numbers):
                     controle = 1
@@ -651,6 +781,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 71:
                 if carac == "d":
                     state = 72
@@ -659,6 +796,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 72:
                 if not (carac in full_alphabet or carac in numbers):
@@ -680,6 +824,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 74:
                 if carac == "s":
                     state = 75
@@ -689,6 +840,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 75:
                 if carac == "e":
                     state = 76
@@ -697,6 +855,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 76:
                 if not (carac in full_alphabet or carac in numbers):
@@ -718,6 +883,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 78:
                 if not (carac in full_alphabet or carac in numbers):
                     controle = 1
@@ -738,6 +910,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 86:
                 if carac == "t":
                     state = 87
@@ -746,6 +925,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 87:
                 if not (carac in full_alphabet or carac in numbers):
@@ -767,6 +953,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 81:
                 if carac == "i":
                     state = 82
@@ -775,6 +968,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 82:
                 if carac == "l":
@@ -785,6 +985,13 @@ class Automato:
                     state = 7
                     self.txt += carac
 
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
             elif state == 83:
                 if carac == "e":
                     state = 84
@@ -793,6 +1000,13 @@ class Automato:
                 elif carac in full_alphabet:
                     state = 7
                     self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
 
             elif state == 84:
                 if not (carac in full_alphabet or carac in numbers):
@@ -812,7 +1026,7 @@ class Automato:
                 controle = 0
 my_lex = Automato()  
 
-my_lex.read_file("exemplo.txt")
+my_lex.read_file("cod_teste3.txt")
 my_lex.analyzes_code()
 #print(my_lex.code_enter)
 

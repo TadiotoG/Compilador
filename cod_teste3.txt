@@ -1,1 +1,3 @@
-and boolean else float for if input int not or output string ++ ++ --
+for(i:=0,i<pot,i++){
+    x := x * mult;
+};
