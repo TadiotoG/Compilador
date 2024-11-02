@@ -1,14 +1,18 @@
 <program> := <IdentificadorTipo> | <Identificador> | <SaidaDados> | <LacoECondicao> 
 
-<IdentificadorTipo> := idInt<Identificador> | idFloat<Identificador> | idBoolean <Identificador> |  idString<Identificador>   
+<IdentificadorTipo> := idInt<Identificador> | idFloat<Identificador> | idBoolean<Identificador> |  idString<Identificador>   
 
-<Identificador> :=  id<FimLinha> | id <Atribuição> 
+<Identificador> :=  id<AuxIdent>
+
+<AuxIdent> := <Atribuição> | <FimLinha>
 
 <Dados> :=  id<Dados’> | string<Dados’> | int<Dados’> | float<Dados’> | par_esq<Dados>par_dir 
 
 <Dados’> : = <Dados> | <FimLinha> | op_aritmetico <Dados>
 
-<Atribuição> := atribuição<Dados> | atribuição<EntradaDados>
+<Atribuição> := atribuição<AuxAtribuição>
+
+<AuxAtribuição> := <Dados> | <EntradaDados>
 
 <FimLinha> := fim_linha 
 
