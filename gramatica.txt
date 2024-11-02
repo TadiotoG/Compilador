@@ -30,7 +30,9 @@
 
 <ConteudoDO>  :=  col_esq<program>col_dir 
 
-<ConteudoWhile> := id<ConteudoWhile’> | id<FimLinha>
+<ConteudoWhile> := id<AuxConteudoWhile>
+
+<AuxConteudoWhile> := <ConteudoWhile’> | <FimLinha>
 
 <ConteudoWhile’> := op_relacional<Dados>
 
