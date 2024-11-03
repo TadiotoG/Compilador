@@ -1,3 +1,6 @@
+from sintatico import Sintatico
+
+
 alphabet_low = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "_"] # Inclui _ nos 2 alfabetos maiusculos e minusculos
 
 alphabet_high = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "_"]
@@ -18,7 +21,7 @@ class Automato:
         with open(file_name, "r") as reading:
             self.code_enter = reading.readlines()
             # i=0
-            # print(self.code_enter)
+            # #print(self.code_enter)
             # for self.code_enter in self.code_enter:
             #    self.code.insert(i,self.code_enter.split())
             #    i += 1
@@ -36,7 +39,7 @@ class Automato:
         while i < len(string):
             carac = string[i]
 
-            # print("Estado:", state)
+            # #print("Estado:", state)
 
             if state == 1: # Para o estado 1 do automato, fazer a regra de todas as transicoes
                 if carac == "o":
@@ -98,22 +101,22 @@ class Automato:
                 elif carac == '(':
                     state = 1
                     self.tokens.append([carac, "par_esq"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
 
                 elif carac == ')':
                     state = 1
                     self.tokens.append([carac, "par_dir"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
 
                 elif carac == '{':
                     state = 1
                     self.tokens.append([carac, "col_esq"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
 
                 elif carac == '}':
                     state = 1
                     self.tokens.append([carac, "col_dir"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
 
                 elif carac == "@":
                     self.txt =  carac
@@ -122,14 +125,14 @@ class Automato:
                 elif carac == ';':
                     self.txt =  carac
                     self.tokens.append([self.txt, "fim_linha"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     state = 1
                     self.txt = ""
 
                 elif carac == '\n':
                     self.txt =  carac
                     self.tokens.append([self.txt, "ContraBarraN"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     state = 1
                     self.txt = ""
 
@@ -137,7 +140,7 @@ class Automato:
                     self.txt =  carac
                     state = 1
                     self.tokens.append([carac, "op_aritmetico"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
 
                 elif carac in ["<", ">"]:
                     self.txt =  carac
@@ -150,7 +153,7 @@ class Automato:
                 elif carac == "=":
                     state = 1
                     self.tokens.append([carac, "op_relacional"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
 
                 elif carac == ":":
                     self.txt =  carac
@@ -159,12 +162,12 @@ class Automato:
                 elif carac == ",":
                     state = 1
                     self.tokens.append([carac, "virgula"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
 
                 else:
                     if carac != " " and carac != "\n":
                         self.txt +=  carac
-                        print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
+                        #print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
                         state = 1
 
 
@@ -180,7 +183,7 @@ class Automato:
                     controle = 1
                     state = 1
                     self.tokens.append([self.txt, "int"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 4:
@@ -192,7 +195,7 @@ class Automato:
                     while i < len(string) and (string[i] != ' ' and string[i] != '\n'):
                         self.txt += string[i]
                         i+=1
-                    print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
+                    #print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
                     state = 1
                     controle = 1
 
@@ -205,7 +208,7 @@ class Automato:
                     controle = 1
                     state = 1
                     self.tokens.append([self.txt, "float"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                             
             elif state == 7:
@@ -219,7 +222,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 9:
@@ -227,7 +230,7 @@ class Automato:
                     self.txt +=  carac
                     state = 1
                     self.tokens.append([self.txt, "string"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     self.txt +=  carac
@@ -238,7 +241,7 @@ class Automato:
                     state = 1
                     self.txt +=  carac
                     self.tokens.append([self.txt, "comentario"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                     controle = 1
 
@@ -251,13 +254,13 @@ class Automato:
                     self.txt +=  carac
                     state = 1
                     self.tokens.append([self.txt, "op_relacional"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     controle = 1
                     state = 1
                     self.tokens.append([self.txt, "op_relacional"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 19:
@@ -265,14 +268,14 @@ class Automato:
                     self.txt +=  carac
                     state = 1
                     self.tokens.append([self.txt, "op_relacional"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
                 else:
                     while i < len(string) and (string[i] != ' ' and string[i] != '\n'):
                         self.txt += string[i]
                         i+=1
-                    print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
+                    #print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
                     state = 1
                     controle = 1
 
@@ -281,14 +284,14 @@ class Automato:
                     self.txt +=  carac
                     state = 1
                     self.tokens.append([self.txt, "atribuicao"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
                 else:
                     while i < len(string) and (string[i] != ' ' and string[i] != '\n'):
                         self.txt += string[i]
                         i+=1
-                    print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
+                    #print("Erro na linha ", linha+1, "  palavra:", self.txt, "  estado:", state,  "\n")
                     state = 1
                     controle = 1
 
@@ -309,7 +312,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 27:
@@ -329,7 +332,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 28:
@@ -345,7 +348,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 29:
@@ -361,7 +364,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 30:
@@ -381,7 +384,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 31:
@@ -389,7 +392,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "idInt"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
                 else:
@@ -409,7 +412,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 34:
@@ -425,7 +428,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 35:
@@ -441,7 +444,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 36:
@@ -449,7 +452,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "idFloat"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
                 else:
@@ -469,7 +472,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 39:
@@ -485,7 +488,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 40:
@@ -501,7 +504,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 41:
@@ -517,7 +520,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 42:
@@ -525,7 +528,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "idString"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
                 else:
@@ -545,7 +548,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 45:
@@ -561,7 +564,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 46:
@@ -577,7 +580,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 47:
@@ -593,7 +596,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 48:
@@ -609,7 +612,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 49:
@@ -617,7 +620,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "idBoolean"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
                 else:
@@ -629,13 +632,13 @@ class Automato:
                     self.txt += "+"
                     state = 1 
                     self.tokens.append([self.txt, "incremento"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
                 else:
                     state = 1
                     self.tokens.append([self.txt, "op_aritmetico"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     controle = 1
                     self.txt = ""
 
@@ -644,13 +647,13 @@ class Automato:
                     self.txt += "-"
                     state = 1 
                     self.tokens.append([self.txt, "decremento"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
                 else:
                     state = 1
                     self.tokens.append([self.txt, "op_aritmetico"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     controle = 1
                     self.txt = ""
 
@@ -659,7 +662,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "if"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     state = 7
@@ -688,7 +691,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "input"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     state = 7
@@ -711,7 +714,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 62:
@@ -719,7 +722,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "or"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     state = 7
@@ -766,7 +769,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "output"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     state = 7
@@ -785,7 +788,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 71:
@@ -801,7 +804,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 72:
@@ -809,7 +812,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "and"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     state = 7
@@ -828,7 +831,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 74:
@@ -844,7 +847,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 75:
@@ -860,7 +863,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 76:
@@ -868,7 +871,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "else"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     state = 7
@@ -887,7 +890,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 78:
@@ -895,7 +898,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "for"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     state = 7
@@ -914,7 +917,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 86:
@@ -930,7 +933,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 87:
@@ -938,7 +941,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "not"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     state = 7
@@ -957,7 +960,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 81:
@@ -973,7 +976,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 82:
@@ -989,7 +992,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 83:
@@ -1005,7 +1008,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "id"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
 
             elif state == 84:
@@ -1013,7 +1016,7 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "while"])
-                    print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:
                     state = 7
@@ -1028,7 +1031,11 @@ my_lex = Automato()
 
 my_lex.read_file("cod_teste3.txt")
 my_lex.analyzes_code()
-#print(my_lex.code_enter)
 
-# my_lex.print_tokens()
-print(my_lex.tokens)
+##print(my_lex.tokens)
+tokens_solo = []
+for i in my_lex.tokens:
+    if (i[1] != 'ContraBarraN' and i[1] != "comentario"):
+        tokens_solo.append(i[1])
+##print(tokens_solo)
+Sintatico(tokens_solo)
