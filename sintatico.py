@@ -16,41 +16,43 @@ class Sintatico:
 
     def analise_sintatica(self):
         posi_entrada = 0
-        controle = 0
-        while controle < 10:
+        controle = 1
+        posi = 0
+        while controle < 20:
             controle += 1
-            #if len(self.entrada) == 0 :
-             #   print("Aceita")
-              #  break  
+            if len(self.entrada) == 0 :
+                print("Aceita")
+                break  
 
             topo = self.entrada[posi_entrada]
-            posi = len(self.pilha) - 1
-            producao = []
-            #print("Entrada", self.entrada)
-            #print("Pilha", self.pilha)
-                
+                           
             if self.entrada[posi_entrada] == self.pilha[posi]:
-                print("Desempilha", self.pilha[posi], "avança na leitura da sentença")
+                print("\nDesempilha", self.pilha[posi], "avança na leitura da sentença\n")
                 self.entrada.pop(0)
-                self.pilha.pop(posi)
+                self.pilha.pop()
+                posi -= 1
             else:
-                
+                producao = []
                 for i in range(len(self.regras)):  
+                    #print("Verificando", self.regras[i][0] , self.pilha[posi])
                     if self.regras[i][0] == self.pilha[posi]:
+                        #print("Entrou", self.regras[i][0] , self.pilha[posi])
                         for j in range(len(self.regras[0])): 
                             
                             if self.regras[0][j] == topo:
                                 
-                                print("Entrada",topo)
+                                print("Entrada", topo)
                                 print("Pilha", self.pilha[posi])
                                 print(i , j)
-                                print(self.regras[i][j+1])
+                                #print(self.regras[i][j+1])
                                 if self.regras[i][j] != '':
                                     
                                     print(self.regras[i][j])
                                     producao = self.regras[i][j]  
                                     producao = producao.split(" ")  
                                     producao_invertida = producao[::-1]
-                                    self.pilha.pop(0)  
+                                    self.pilha.pop()  
+                                    posi = len (producao_invertida) -1                                    
                                     self.pilha.extend(producao_invertida) 
+                                    print("Pilha total", self.pilha)
                                 
