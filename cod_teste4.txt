@@ -1,3 +1,1 @@
-!! 1meuid;
-dsasda@dsasd
-12A 12a @
+int vagabundo = 30;

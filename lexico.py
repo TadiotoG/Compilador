@@ -1029,7 +1029,7 @@ class Automato:
                 controle = 0
 my_lex = Automato()  
 
-my_lex.read_file("cod_teste3.txt")
+my_lex.read_file("cod_teste4.txt")
 my_lex.analyzes_code()
 
 ##print(my_lex.tokens)
@@ -1037,5 +1037,6 @@ tokens_solo = []
 for i in my_lex.tokens:
     if (i[1] != 'ContraBarraN' and i[1] != "comentario"):
         tokens_solo.append(i[1])
-##print(tokens_solo)
-Sintatico(tokens_solo)
+print("Tokens: ", tokens_solo)
+
+sintatico = Sintatico(tokens_solo)

@@ -27,7 +27,7 @@ class Sintatico:
             topo = self.entrada[posi_entrada]
                            
             if self.entrada[posi_entrada] == self.pilha[posi]:
-                print("\nDesempilha", self.pilha[posi], "avança na leitura da sentença\n")
+                print("\nDesempilha ", self.pilha[posi], " avança na leitura da sentença\n")
                 self.entrada.pop(0)
                 self.pilha.pop()
                 posi -= 1
