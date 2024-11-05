@@ -1,0 +1,25 @@
+<ConteudoCondicaoFor> := id <ConteudoCondicao’> | string <ConteudoCondicao’> | int <ConteudoCondicao’> | float <ConteudoCondicao’> | par_esq <ConteudoCondicao> par_dir
+
+<ConteudoCondicaoFor’> := op_relacional <ConteudoCondicao> | op_aritmetico <ConteudoCondicao> | or <ConteudoCondicao> | and <ConteudoCondicao> | virgula
+
+<ConteudoFor> := id<ValorInicial>virgula<ConteudoCondicaoFor> id <Increm_decrem> col_esq <program> col_dir
+
+------------------------------------------------------------------------------
+
+<LacoECondicao> := do<ConteudoDO> while <ConteudoCondicaoWhile> | if <ConteudoCondicao> <FinalCond> | for<ConteudoFor>
+
+<ConteudoCondicaoWhile> := id <ConteudoCondicaoWhile'> | string <ConteudoCondicaoWhile'> | int <ConteudoCondicaoWhile'> | float <ConteudoCondicaoWhile'> | par_esq <ConteudoCondicao> par_dir
+
+<ConteudoCondicaoWhile'> := op_relacional <ConteudoCondicao> | op_aritmetico <ConteudoCondicao> | or <ConteudoCondicao> | and <ConteudoCondicao> | fim_linha
+
+------------------------------------------------------------------------------
+
+for i:=0,i<3,i++{
+    x := x * mult;
+};
+
+id := input();
+
+string DaviPacu := "O maior de todos"; 
+
+o programa acima roda perfeitamente quando roda uma linha e depois a outra, porem ao tentar rodar eles juntos n da certo, falta chamar de alguma maneira o <program> novamente

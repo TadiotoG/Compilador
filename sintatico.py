@@ -18,7 +18,6 @@ class Sintatico:
     def analise_sintatica(self):
         posi_entrada = 0
         controle = 1
-        posi = 0
         while controle < 50:
             print("----- Rodada ", controle, " -----")
             controle += 1
@@ -28,24 +27,23 @@ class Sintatico:
 
             topo = self.entrada[posi_entrada]
                            
-            if self.entrada[posi_entrada] == self.pilha[posi]:
-                print("Desempilha ", self.pilha[posi], " avança na leitura da sentença")
+            if self.entrada[posi_entrada] == self.pilha[-1]:
+                print("Desempilha ", self.pilha[-1], " avança na leitura da sentença")
                 self.entrada.pop(0)
                 self.pilha.pop()
-                posi -= 1
                 print("Pilha total", self.pilha, "\n\n")
             else:
                 producao = []
                 for i in range(len(self.regras)):  
                     #print("Verificando", self.regras[i][0] , self.pilha[posi])
-                    if self.regras[i][0] == self.pilha[posi]:
+                    if self.regras[i][0] == self.pilha[-1]:
                         #print("Entrou", self.regras[i][0] , self.pilha[posi])
                         for j in range(len(self.regras[0])): 
                             
                             if self.regras[0][j] == topo:
                                 
                                 print("Entrada", topo)
-                                print("Pilha[", posi, "]:", self.pilha[posi])
+                                print("Pilha[", len(self.pilha)-1, "]:", self.pilha[-1])
                                 print(i , j)
                                 #print(self.regras[i][j+1])
                                 if self.regras[i][j] != '':
@@ -54,15 +52,14 @@ class Sintatico:
                                     producao = self.regras[i][j]  
                                     producao = producao.split(" ")  
                                     producao_invertida = producao[::-1]
-                                    self.pilha.pop()  
-                                    posi = len(producao_invertida) - 1
+                                    self.pilha.pop()
                                     self.pilha.extend(producao_invertida)
                                     print("Empilha: ", producao_invertida) 
                                     print("Pilha total", self.pilha, "\n\n")
                     
 my_lex = Automato()  
 
-my_lex.read_file("cod_teste3.txt")
+my_lex.read_file("cod_teste.txt")
 my_lex.analyzes_code()
 
 tokens_solo = []

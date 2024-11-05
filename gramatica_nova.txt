@@ -1,0 +1,55 @@
+<program> := <IdentificadorTipo> | <Identificador> | <SaidaDados> | <LacoECondicao> 
+
+<IdentificadorTipo> := idInt<Identificador> | idFloat<Identificador> | idBoolean<Identificador> |  idString<Identificador>   
+
+<Identificador> :=  id<AuxIdent>
+
+<AuxIdent> := <Atribuição> | <FimLinha>
+
+<Dados> :=  id<Dados'> | string<Dados'> | int<Dados'> | float<Dados'> | par_esq<Dados>par_dir 
+
+<Dados'> : = <Dados> | <FimLinha> | op_aritmetico <Dados>
+
+<Atribuição> := atribuição<AuxAtribuição>
+
+<AuxAtribuição> := <Dados> | <EntradaDados>
+
+<FimLinha> := fim_linha 
+
+<EntradaDados> := input <Parênteses> fim_linha 
+
+<Parênteses> := par_esq par_dir
+
+<SaidaDados> :=  output<ConteúdoSaida>fim_linha 
+
+<ConteúdoSaida> := par_esq<ConteúdoSaida'>par_dir 
+
+<ConteúdoSaida'> :=  string  | id 
+
+<LacoECondicao> := do<ConteudoDO> while <ConteudoCondicaoWhile> | if <ConteudoCondicao> <FinalCond> | for<ConteudoFor>
+
+<ConteudoWhile'> := op_relacional<Dados>
+
+<ConteudoCondicao> := id <ConteudoCondicao'> | string <ConteudoCondicao'> | int <ConteudoCondicao'> | float <ConteudoCondicao'> | par_esq <ConteudoCondicao> par_dir
+
+<ConteudoCondicao'> := op_relacional <ConteudoCondicao> | op_aritmetico <ConteudoCondicao> | or <ConteudoCondicao> | and <ConteudoCondicao> | col_esq <program> col_dir
+
+<FinalCond> := fim_linha | else col_esq <program> col_dir fim_linha
+
+<ConteudoFor> := id<ValorInicial>virgula<ConteudoCondicaoFor> id <Increm_decrem> col_esq <program> col_dir
+
+<ValorInicial> := atribuição<DadosAtrib>
+
+<DadosAtrib> := id | int | float 
+
+<Increm_decrem> := incremento | decremento
+
+
+<ConteudoCondicaoFor> := id <ConteudoCondicaoFor'> | string <ConteudoCondicaoFor'> | int <ConteudoCondicaoFor'> | float <ConteudoCondicaoFor'> | par_esq <ConteudoCondicaoFor> par_dir
+
+<ConteudoCondicaoFor'> := op_relacional <ConteudoCondicaoFor> | op_aritmetico <ConteudoCondicaoFor> | or <ConteudoCondicaoFor> | and <ConteudoCondicaoFor> | virgula
+
+
+<ConteudoCondicaoWhile> := id <ConteudoCondicaoWhile'> | string <ConteudoCondicaoWhile'> | int <ConteudoCondicaoWhile'> | float <ConteudoCondicaoWhile'> | par_esq <ConteudoCondicaoWhile> par_dir
+
+<ConteudoCondicaoWhile'> := op_relacional <ConteudoCondicao> | op_aritmetico <ConteudoCondicao> | or <ConteudoCondicao> | and <ConteudoCondicao> | fim_linha

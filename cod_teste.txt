@@ -1,4 +1,3 @@
-for
-{}
-Jacu := 4;
-"Texto entre aspas" @Comentario 123 < ?
+if gabriel {
+    gabriel := 2;
+}
