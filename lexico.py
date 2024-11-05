@@ -43,6 +43,10 @@ class Automato:
                     self.txt = carac
                     state = 61
 
+                elif carac == "d":
+                    self.txt = carac
+                    state = 88
+
                 elif carac == "w":
                     self.txt = carac
                     state = 80
@@ -1013,6 +1017,29 @@ class Automato:
                     controle = 1
                     state = 1 
                     self.tokens.append([self.txt, "while"])
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+                else:
+                    state = 7
+                    self.txt += carac
+
+            elif state == 88:
+                if carac == "o":
+                    state = 89
+                    self.txt += carac
+
+                else:
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "id"])
+                    #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
+                    self.txt = ""
+
+            elif state == 89:
+                if not (carac in full_alphabet or carac in numbers):
+                    controle = 1
+                    state = 1 
+                    self.tokens.append([self.txt, "do"])
                     #print("Código encontrado: ", self.tokens[-1][0], "    Token: ", self.tokens[-1][1], "\n")
                     self.txt = ""
                 else:

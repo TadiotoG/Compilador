@@ -59,7 +59,7 @@ class Sintatico:
                     
 my_lex = Automato()  
 
-my_lex.read_file("cod_teste.txt")
+my_lex.read_file("cod_teste2.txt")
 my_lex.analyzes_code()
 
 tokens_solo = []

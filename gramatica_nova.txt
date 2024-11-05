@@ -44,7 +44,6 @@
 
 <Increm_decrem> := incremento | decremento
 
-
 <ConteudoCondicaoFor> := id <ConteudoCondicaoFor'> | string <ConteudoCondicaoFor'> | int <ConteudoCondicaoFor'> | float <ConteudoCondicaoFor'> | par_esq <ConteudoCondicaoFor> par_dir
 
 <ConteudoCondicaoFor'> := op_relacional <ConteudoCondicaoFor> | op_aritmetico <ConteudoCondicaoFor> | or <ConteudoCondicaoFor> | and <ConteudoCondicaoFor> | virgula
@@ -52,4 +51,4 @@
 
 <ConteudoCondicaoWhile> := id <ConteudoCondicaoWhile'> | string <ConteudoCondicaoWhile'> | int <ConteudoCondicaoWhile'> | float <ConteudoCondicaoWhile'> | par_esq <ConteudoCondicaoWhile> par_dir
 
-<ConteudoCondicaoWhile'> := op_relacional <ConteudoCondicao> | op_aritmetico <ConteudoCondicao> | or <ConteudoCondicao> | and <ConteudoCondicao> | fim_linha
+<ConteudoCondicaoWhile'> := op_relacional <ConteudoCondicaoWhile> | op_aritmetico <ConteudoCondicaoWhile> | or <ConteudoCondicaoWhile> | and <ConteudoCondicaoWhile> | fim_linha

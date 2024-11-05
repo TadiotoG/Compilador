@@ -1,3 +1,4 @@
-for i:=0,i<3,i++{
-    x := x * mult;
-};
+do {
+    string Davi := "Pica";
+} while (hetero != 1)
+
