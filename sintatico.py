@@ -18,7 +18,7 @@ class Sintatico:
     def analise_sintatica(self):
         posi_entrada = 0
         controle = 1
-        while controle < 50:
+        while controle < 30:
             print("----- Rodada ", controle, " -----")
             controle += 1
             if len(self.entrada) == 0 :
@@ -29,23 +29,26 @@ class Sintatico:
                            
             if self.entrada[posi_entrada] == self.pilha[-1]:
                 print("Desempilha ", self.pilha[-1], " avança na leitura da sentença")
+                print("Pilha Antes", self.pilha, "\n\n")
                 self.entrada.pop(0)
                 self.pilha.pop()
                 print("Pilha total", self.pilha, "\n\n")
             else:
                 producao = []
                 for i in range(len(self.regras)):  
-                    #print("Verificando", self.regras[i][0] , self.pilha[posi])
+                    
                     if self.regras[i][0] == self.pilha[-1]:
-                        #print("Entrou", self.regras[i][0] , self.pilha[posi])
+                        #print("Verificando", self.regras[i][0] , self.pilha[-1])
+                        #print("Pilha total", self.pilha, "\n\n") 
+                        #print("Entrada total", self.entrada,"\n\n")                      
                         for j in range(len(self.regras[0])): 
-                            
+                            #print("Verificando", self.regras[0][j] , topo)
                             if self.regras[0][j] == topo:
                                 
                                 print("Entrada", topo)
                                 print("Pilha[", len(self.pilha)-1, "]:", self.pilha[-1])
                                 print(i , j)
-                                #print(self.regras[i][j+1])
+                                print(self.regras[i][j+1])
                                 if self.regras[i][j] != '':
                                     
                                     print(self.regras[i][j])
@@ -59,7 +62,7 @@ class Sintatico:
                     
 my_lex = Automato()  
 
-my_lex.read_file("cod_teste2.txt")
+my_lex.read_file("cod_teste3.txt")
 my_lex.analyzes_code()
 
 tokens_solo = []

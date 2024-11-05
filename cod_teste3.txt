@@ -1,4 +1,3 @@
-do {
-    string Davi := "Pica";
-} while (hetero != 1)
-
+if (gabriel < Jacu) {
+    jacu := gabriel
+}

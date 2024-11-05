@@ -4,7 +4,7 @@
 
 <Identificador> :=  id<AuxIdent>
 
-<AuxIdent> := <Atribuição> | <FimLinha>
+<AuxIdent> := <Atribuição> | <FimLinha> 
 
 <Dados> :=  id<Dados'> | string<Dados'> | int<Dados'> | float<Dados'> | par_esq<Dados>par_dir 
 
@@ -30,9 +30,9 @@
 
 <ConteudoWhile'> := op_relacional<Dados>
 
-<ConteudoCondicao> := id <ConteudoCondicao'> | string <ConteudoCondicao'> | int <ConteudoCondicao'> | float <ConteudoCondicao'> | par_esq <ConteudoCondicao> par_dir
+<ConteudoCondicao> := id <ConteudoCondicao'> | string <ConteudoCondicao'> | int <ConteudoCondicao'> | float <ConteudoCondicao'> | par_esq <ConteudoCondicao> 
 
-<ConteudoCondicao'> := op_relacional <ConteudoCondicao> | op_aritmetico <ConteudoCondicao> | or <ConteudoCondicao> | and <ConteudoCondicao> | col_esq <program> col_dir
+<ConteudoCondicao'> := op_relacional <ConteudoCondicao> | op_aritmetico <ConteudoCondicao> | or <ConteudoCondicao> | and <ConteudoCondicao> | col_esq <program> col_dir | par_dir <ConteudoCondicao>
 
 <FinalCond> := fim_linha | else col_esq <program> col_dir fim_linha
 
