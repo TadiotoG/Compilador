@@ -1,6 +1,3 @@
-from sintatico import Sintatico
-
-
 alphabet_low = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "_"] # Inclui _ nos 2 alfabetos maiusculos e minusculos
 
 alphabet_high = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "_"]
@@ -1027,16 +1024,3 @@ class Automato:
 
             else:
                 controle = 0
-my_lex = Automato()  
-
-my_lex.read_file("cod_teste4.txt")
-my_lex.analyzes_code()
-
-##print(my_lex.tokens)
-tokens_solo = []
-for i in my_lex.tokens:
-    if (i[1] != 'ContraBarraN' and i[1] != "comentario"):
-        tokens_solo.append(i[1])
-print("Tokens: ", tokens_solo)
-
-sintatico = Sintatico(tokens_solo)

@@ -1,4 +1,5 @@
 import csv
+from lexico import Automato
 
 class Sintatico:
     def __init__(self, tokens):
@@ -18,7 +19,8 @@ class Sintatico:
         posi_entrada = 0
         controle = 1
         posi = 0
-        while controle < 20:
+        while controle < 50:
+            print("----- Rodada ", controle, " -----")
             controle += 1
             if len(self.entrada) == 0 :
                 print("Aceita")
@@ -27,10 +29,11 @@ class Sintatico:
             topo = self.entrada[posi_entrada]
                            
             if self.entrada[posi_entrada] == self.pilha[posi]:
-                print("\nDesempilha ", self.pilha[posi], " avança na leitura da sentença\n")
+                print("Desempilha ", self.pilha[posi], " avança na leitura da sentença")
                 self.entrada.pop(0)
                 self.pilha.pop()
                 posi -= 1
+                print("Pilha total", self.pilha, "\n\n")
             else:
                 producao = []
                 for i in range(len(self.regras)):  
@@ -42,7 +45,7 @@ class Sintatico:
                             if self.regras[0][j] == topo:
                                 
                                 print("Entrada", topo)
-                                print("Pilha", self.pilha[posi])
+                                print("Pilha[", posi, "]:", self.pilha[posi])
                                 print(i , j)
                                 #print(self.regras[i][j+1])
                                 if self.regras[i][j] != '':
@@ -52,7 +55,20 @@ class Sintatico:
                                     producao = producao.split(" ")  
                                     producao_invertida = producao[::-1]
                                     self.pilha.pop()  
-                                    posi = len (producao_invertida) -1                                    
-                                    self.pilha.extend(producao_invertida) 
-                                    print("Pilha total", self.pilha)
-                                
+                                    posi = len(producao_invertida) - 1
+                                    self.pilha.extend(producao_invertida)
+                                    print("Empilha: ", producao_invertida) 
+                                    print("Pilha total", self.pilha, "\n\n")
+                    
+my_lex = Automato()  
+
+my_lex.read_file("cod_teste3.txt")
+my_lex.analyzes_code()
+
+tokens_solo = []
+for i in my_lex.tokens:
+    if (i[1] != 'ContraBarraN' and i[1] != "comentario"):
+        tokens_solo.append(i[1])
+print("Tokens: ", tokens_solo)
+
+sintatico = Sintatico(tokens_solo)

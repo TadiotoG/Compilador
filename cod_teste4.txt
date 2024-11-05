@@ -1,1 +1,3 @@
-int vagabundo = 30;
+int vagabundo := 30;
+
+@['idInt', 'id', 'atribuicao', 'int', 'fim_linha']
