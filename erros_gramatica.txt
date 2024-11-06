@@ -23,7 +23,7 @@ Exemplo:
     };
 
 2 - Todas as condições, seja para for, do while ou if não estão aceitando parenteses
-Exemplos:
+Exemplos: Parenteses o carai 
 ----------------------------------
     for i:=0,(i<3),i++{
         x := x * mult;
@@ -34,7 +34,7 @@ Exemplos:
     } while (hetero != 1)
 ----------------------------------
     if (gabriel < 3) {
-        gabriel := "baixo";
+        gabriel := "baixo"; Essa funfa
     }
 ----------------------------------
 Mas se retirar o () ele aceita normalmente...

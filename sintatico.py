@@ -7,7 +7,7 @@ class Sintatico:
         self.pilha = []
         self.regras = []
         self.pilha.append('<program>')
-        self.read_file('Tabela_Regras.csv')
+        self.read_file('Tabela_Regras2.csv')
         self.analise_sintatica()
         
     def read_file(self, file_name):
@@ -18,10 +18,11 @@ class Sintatico:
     def analise_sintatica(self):
         posi_entrada = 0
         controle = 1
-        while controle < 30:
+        while controle > 0:
             print("----- Rodada ", controle, " -----")
+            print(self.entrada)
             controle += 1
-            if len(self.entrada) == 0 :
+            if (len(self.entrada) == 0 )  :
                 print("Aceita")
                 break  
 
@@ -48,26 +49,39 @@ class Sintatico:
                                 print("Entrada", topo)
                                 print("Pilha[", len(self.pilha)-1, "]:", self.pilha[-1])
                                 print(i , j)
-                                print(self.regras[i][j+1])
-                                if self.regras[i][j] != '':
+                                print(self.regras[i][j])
+                                if self.regras[i][j] != '' and self.regras[i][j] != 'sinc':
                                     
-                                    print(self.regras[i][j])
+                                    #print(self.regras[i][j])
                                     producao = self.regras[i][j]  
                                     producao = producao.split(" ")  
                                     producao_invertida = producao[::-1]
                                     self.pilha.pop()
-                                    self.pilha.extend(producao_invertida)
+                                    teste = ['<Vazio>']
+                                    if producao_invertida != ['<Vazio>']:
+                                        self.pilha.extend(producao_invertida)
                                     print("Empilha: ", producao_invertida) 
                                     print("Pilha total", self.pilha, "\n\n")
-                    
+                                elif self.regras[i][j] != '':
+                                    print("Entrada da tabela vazia")
+                                    print("Descartando o Token", self.entrada[0], "\n\n")
+                                    self.entrada.pop(0)
+
+                                else:
+                                    print("Entrada Sinc")
+                                    print("Descartando o Não terminal ", self.pilha[0], " da pilha \n\n")
+                                    self.pilha.pop()
+
+
 my_lex = Automato()  
 
 my_lex.read_file("cod_teste3.txt")
 my_lex.analyzes_code()
 
 tokens_solo = []
+
 for i in my_lex.tokens:
-    if (i[1] != 'ContraBarraN' and i[1] != "comentario"):
+    if (i[1] != "ContraBarraN" and i[1] != "comentario"):        
         tokens_solo.append(i[1])
 print("Tokens: ", tokens_solo)
 

@@ -1,4 +1,4 @@
-<program> := <IdentificadorTipo> | <Identificador> | <SaidaDados> | <LacoECondicao> 
+<program> := <IdentificadorTipo> | <Identificador> | <SaidaDados> | <LacoECondicao> | Vazio
 
 <IdentificadorTipo> := idInt<Identificador> | idFloat<Identificador> | idBoolean<Identificador> |  idString<Identificador>   
 
@@ -8,25 +8,27 @@
 
 <Dados> :=  id<Dados'> | string<Dados'> | int<Dados'> | float<Dados'> | par_esq<Dados>par_dir 
 
-<Dados'> : = <Dados> | <FimLinha> | op_aritmetico <Dados>
+<Dados'> : = <Dados> | <FimLinha> | op_aritmetico <Dados> 
 
 <Atribuição> := atribuição<AuxAtribuição>
 
 <AuxAtribuição> := <Dados> | <EntradaDados>
 
-<FimLinha> := fim_linha 
+<FimLinha> := fim_linha<program> 
 
-<EntradaDados> := input <Parênteses> fim_linha 
+<EntradaDados> := input <Parênteses> <FimLinha> 
 
 <Parênteses> := par_esq par_dir
 
-<SaidaDados> :=  output<ConteúdoSaida>fim_linha 
+<SaidaDados> :=  output<ConteúdoSaida><FimLinha> 
 
 <ConteúdoSaida> := par_esq<ConteúdoSaida'>par_dir 
 
 <ConteúdoSaida'> :=  string  | id 
 
-<LacoECondicao> := do<ConteudoDO> while <ConteudoCondicaoWhile> | if <ConteudoCondicao> <FinalCond> | for<ConteudoFor>
+<LacoECondicao> := do<ConteudoDO> while <ConteudoCondicaoWhile> | if <ConteudoCondicao> <FinalCond> | for<ConteudoFor> <program>
+
+<ConteudoDO>  :=  col_esq<program>col_dir 
 
 <ConteudoWhile'> := op_relacional<Dados>
 
@@ -34,9 +36,9 @@
 
 <ConteudoCondicao'> := op_relacional <ConteudoCondicao> | op_aritmetico <ConteudoCondicao> | or <ConteudoCondicao> | and <ConteudoCondicao> | col_esq <program> col_dir | par_dir <ConteudoCondicao>
 
-<FinalCond> := fim_linha | else col_esq <program> col_dir fim_linha
+<FinalCond> := <program>| else col_esq <program> col_dir <program>
 
-<ConteudoFor> := id<ValorInicial>virgula<ConteudoCondicaoFor> id <Increm_decrem> col_esq <program> col_dir
+<ConteudoFor> := id<ValorInicial>virgula<ConteudoCondicaoFor> id <Increm_decrem> col_esq <program> col_dir <FimLinha> 
 
 <ValorInicial> := atribuição<DadosAtrib>
 
@@ -44,11 +46,11 @@
 
 <Increm_decrem> := incremento | decremento
 
-<ConteudoCondicaoFor> := id <ConteudoCondicaoFor'> | string <ConteudoCondicaoFor'> | int <ConteudoCondicaoFor'> | float <ConteudoCondicaoFor'> | par_esq <ConteudoCondicaoFor> par_dir
+<ConteudoCondicaoFor> := id <ConteudoCondicaoFor'> | string <ConteudoCondicaoFor'> | int <ConteudoCondicaoFor'> | float <ConteudoCondicaoFor'> | par_esq <ConteudoCondicaoFor>
 
-<ConteudoCondicaoFor'> := op_relacional <ConteudoCondicaoFor> | op_aritmetico <ConteudoCondicaoFor> | or <ConteudoCondicaoFor> | and <ConteudoCondicaoFor> | virgula
+<ConteudoCondicaoFor'> := op_relacional <ConteudoCondicaoFor> | op_aritmetico <ConteudoCondicaoFor> | or <ConteudoCondicaoFor> | and <ConteudoCondicaoFor> | par_dir <ConteudoCondicaoFor'> | virgula
 
 
-<ConteudoCondicaoWhile> := id <ConteudoCondicaoWhile'> | string <ConteudoCondicaoWhile'> | int <ConteudoCondicaoWhile'> | float <ConteudoCondicaoWhile'> | par_esq <ConteudoCondicaoWhile> par_dir
+<ConteudoCondicaoWhile> := id <ConteudoCondicaoWhile'> | string <ConteudoCondicaoWhile'> | int <ConteudoCondicaoWhile'> | float <ConteudoCondicaoWhile'> | par_esq <ConteudoCondicaoWhile> 
 
-<ConteudoCondicaoWhile'> := op_relacional <ConteudoCondicaoWhile> | op_aritmetico <ConteudoCondicaoWhile> | or <ConteudoCondicaoWhile> | and <ConteudoCondicaoWhile> | fim_linha
+<ConteudoCondicaoWhile'> := op_relacional <ConteudoCondicaoWhile> | op_aritmetico <ConteudoCondicaoWhile> | or <ConteudoCondicaoWhile> | and <ConteudoCondicaoWhile> | par_dir <ConteudoCondicaoWhile'> | fim_linha
