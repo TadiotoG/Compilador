@@ -36,7 +36,7 @@
 
 <ConteudoCondicao'> := op_relacional <ConteudoCondicao> | op_aritmetico <ConteudoCondicao> | or <ConteudoCondicao> | and <ConteudoCondicao> | col_esq <program> col_dir | par_dir <ConteudoCondicao>
 
-<FinalCond> := <program>| else col_esq <program> col_dir <program>
+<FinalCond> := <FimLinha> | else col_esq <program> col_dir <FimLinha>
 
 <ConteudoFor> := id<ValorInicial>virgula<ConteudoCondicaoFor> id <Increm_decrem> col_esq <program> col_dir <FimLinha> 
 
