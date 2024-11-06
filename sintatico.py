@@ -18,17 +18,18 @@ class Sintatico:
     def analise_sintatica(self):
         posi_entrada = 0
         controle = 1
-        while controle > 0:
+        while controle < 50:
             print("----- Rodada ", controle, " -----")
             print(self.entrada)
             controle += 1
-            if (len(self.entrada) == 0 )  :
+            if (len(self.entrada) == 0 and len(self.pilha) == 0):
                 print("Aceita")
                 break  
 
-            topo = self.entrada[posi_entrada]
+            if len(self.entrada) != 0:
+                topo = self.entrada[posi_entrada]
                            
-            if self.entrada[posi_entrada] == self.pilha[-1]:
+            if len(self.entrada) != 0 and self.entrada[posi_entrada] == self.pilha[-1]:
                 print("Desempilha ", self.pilha[-1], " avança na leitura da sentença")
                 print("Pilha Antes", self.pilha, "\n\n")
                 self.entrada.pop(0)
@@ -37,7 +38,6 @@ class Sintatico:
             else:
                 producao = []
                 for i in range(len(self.regras)):  
-                    
                     if self.regras[i][0] == self.pilha[-1]:
                         #print("Verificando", self.regras[i][0] , self.pilha[-1])
                         #print("Pilha total", self.pilha, "\n\n") 
