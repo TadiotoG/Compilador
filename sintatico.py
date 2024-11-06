@@ -69,7 +69,7 @@ class Sintatico:
 
                                 else:
                                     print("Entrada Sinc")
-                                    print("Descartando o Não terminal ", self.pilha[0], " da pilha \n\n")
+                                    print("Descartando o Não terminal ", self.pilha[-1], " da pilha \n\n")
                                     self.pilha.pop()
 
 
