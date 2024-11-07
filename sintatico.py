@@ -28,6 +28,9 @@ class Sintatico:
 
             if len(self.entrada) != 0:
                 topo = self.entrada[posi_entrada]
+
+            else:
+                topo = "gambiarra"
                            
             if len(self.entrada) != 0 and self.entrada[posi_entrada] == self.pilha[-1]:
                 print("Desempilha ", self.pilha[-1], " avança na leitura da sentença")
@@ -44,7 +47,7 @@ class Sintatico:
                         #print("Entrada total", self.entrada,"\n\n")                      
                         for j in range(len(self.regras[0])): 
                             #print("Verificando", self.regras[0][j] , topo)
-                            if self.regras[0][j] == topo:
+                            if self.regras[0][j] == topo or topo == "gambiarra":
                                 
                                 print("Entrada", topo, " gostaria de saber:", len(self.pilha))
                                 print("Pilha[", len(self.pilha)-1, "]:", self.pilha[-1])
