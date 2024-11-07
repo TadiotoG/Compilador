@@ -6,6 +6,7 @@ class Sintatico:
         self.entrada = tokens
         self.pilha = []
         self.regras = []
+        self.pilha.append('$')
         self.pilha.append('<program>')
         self.read_file('Tabela_Regras2.csv')
         self.analise_sintatica()
@@ -22,9 +23,9 @@ class Sintatico:
             print("----- Rodada ", controle, " -----")
             print(self.entrada)
             controle += 1
-            if (len(self.entrada) == 0 and len(self.pilha) == 0):
+            if (len(self.entrada) == 0 and len(self.pilha) == 1):
                 print("Aceita")
-                break  
+                break
 
             if len(self.entrada) != 0:
                 topo = self.entrada[posi_entrada]
@@ -52,7 +53,7 @@ class Sintatico:
                                 print("Entrada", topo, " gostaria de saber:", len(self.pilha))
                                 print("Pilha[", len(self.pilha)-1, "]:", self.pilha[-1])
                                 print(i , j)
-                                print(self.regras[i][j])
+                                print("O QUE TENHO >", self.regras[i][j], "<")
                                 if self.regras[i][j] != '' and self.regras[i][j] != 'sinc':
 
                                     #print(self.regras[i][j])
@@ -74,7 +75,6 @@ class Sintatico:
                                     print("Entrada Sinc")
                                     print("Descartando o Não terminal ", self.pilha[-1], " da pilha \n\n")
                                     self.pilha.pop()
-
 
 my_lex = Automato()  
 
