@@ -9,8 +9,9 @@ class Sintatico:
         self.pilha.append('$')
         self.entrada.append('$')
         self.pilha.append('<program>')
-        self.read_file('Tabela_Regras3.csv')
+        self.read_file('Tabela_Regras.csv')
         self.analise_sintatica()
+        self.erro = 0
         
     def read_file(self, file_name):
         with open(file_name, mode='r', newline='', encoding='utf-8') as arquivo_csv:
@@ -20,6 +21,7 @@ class Sintatico:
     def analise_sintatica(self):
         posi_entrada = 0
         controle = 1
+        erro = 0
         while controle > 0:
             print("----- Rodada ", controle, " -----")
             print("Entrada ", self.entrada)
@@ -27,7 +29,11 @@ class Sintatico:
             controle += 1
             
             if len(self.entrada) == 1 and len(self.pilha) == 1 and self.entrada[0] == self.pilha[-1] == '$':
-                print("Aceita")
+                if erro > 1:
+                    print("Aceito com ", erro, " erros!")
+
+                else:
+                    print("Aceito!")
                 break
 
             topo = self.entrada[posi_entrada] if len(self.entrada) != 0 else "gambiarra"
@@ -42,8 +48,7 @@ class Sintatico:
                 for i in range(len(self.regras)):  
                     if self.regras[i][0] == self.pilha[-1]:
                         for j in range(len(self.regras[0])): 
-                            if self.regras[0][j] == topo or topo == "gambiarra":
-                                
+                            if self.regras[0][j] == topo or topo == "gambiarra":                                
                                 if self.regras[i][j] != '' and self.regras[i][j] != 'sinc':
                                     producao = self.regras[i][j].split(" ")
                                     producao_invertida = producao[::-1]
@@ -58,12 +63,14 @@ class Sintatico:
                                     if len(self.pilha) > 1:
                                         print("Descartando o Token", self.entrada[0], "\n\n")                                    
                                         self.entrada.pop(0)
+                                        erro += 1
                                         
                                 else:
                                     print("Entrada Sinc")
                                     if len(self.pilha) > 0 and self.pilha[-1] != '$':
                                         self.pilha.pop()
                                     print(self.entrada)
+                                    erro += 1
                 if not self.pilha:
                     print("Erro: Pilha vazia. A análise foi interrompida.")
                     break

@@ -1,28 +1,28 @@
-,par_esq,par_dir,col_esq,col_dir,fim_linha,op_aritmetico,op_relacional,int,float,id,string,atribuicao,idInt,idFloat,idString,idBoolean,incremento,decremento,if,input,or,output,and,else,for,not,while,do,virgula
-<program>,,,,<Vazio>,,,,,,<Identificador>,,,<IdentificadorTipo>,<IdentificadorTipo>,<IdentificadorTipo>,<IdentificadorTipo>,,,<LacoECondicao>,,,<SaidaDados>,,,<LacoECondicao>,,,<LacoECondicao>,
-<IdentificadorTipo>,,,,sinc,,,,,,,,,idInt <Identificador>,idFloat <Identificador>,idString <Identificador>,idBoolean <Identificador>,,,,,,,,,,,,,
-<Identificador>,,,,,,,,,,id <AuxIdent>,,,,,,,,,,,,,,,,,,,
-<AuxIdent>,,,,,<FimLinha>,,,,,,,<Atribuicao>,,,,,,,,,,,,,,,,,
-<Dados>,par_esq <Dados> par_dir,,,,,,,int <Dados'>,float <Dados'>,id <Dados'>,string <Dados'>,,,,,,,,,,,,,,,,,,
-<Dados'>,,,,,<FimLinha>,op_aritmetico <Dados>,,<Dados>,<Dados>,<Dados>,<Dados>,,,,,,,,,,,,,,,,,,
-<Atribuicao>,,,,,,,,,,,,atribuicao <AuxAtribuicao>,,,,,,,,,,,,,,,,
-<AuxAtribuicao>,,,,,,,,<Dados>,<Dados>,<Dados>,<Dados>,,,,,,,,,<EntradaDados>,,,,,,,,,
-<FimLinha>,,,,,fim_linha <program>,,,,,,,,,,,,,,,,,,,,,,,,
-<EntradaDados>,,,,,,,,,,,,,,,,,,,,input <Parenteses> <FimLinha>,,,,,,,,,
-<Parenteses>,par_esq par_dir,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-<SaidaDados>,,,,,,,,,,,,,,,,,,,,,,output <ConteudoSaida> <FimLinha>,,,,,,,
-<ConteudoSaida>,par_esq <ConteudoSaida'> par_dir,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-<ConteudoSaida'>,,,,,,,,,,id,string,,,,,,,,,,,,,,,,,,
-<LacoECondicao>,,,,,,,,,,,,,,,,,,,if <ConteudoCondicao> <FinalCond>,,,,,,for <ConteudoFor>,,,do <ConteudoDO> while <ConteudoCondicaoWhile>,
-<ConteudoDO>,,,col_esq <program> col_dir,,,,,,,,,,,,,,,,,,,,,,,,,,
-<ConteudoCondicaoWhile>,par_esq <ConteudoCondicaoWhile>,,,,,,,int <ConteudoCondicaoWhile'>,float <ConteudoCondicaoWhile'>,id <ConteudoCondicaoWhile'>,string <ConteudoCondicaoWhile'>,,,,,,,,,,,,,,,,,,
-<ConteudoCondicaoFor>,par_esq <ConteudoCondicaoFor>,,,,,,,int <ConteudoCondicaoFor'>,float <ConteudoCondicaoFor'>,id <ConteudoCondicaoFor'>,string <ConteudoCondicaoFor'>,,,,,,,,,,,,,,,,,,
-<ConteudoCondicaoWhile'>,,par_dir <ConteudoCondicaoWhile'>,,,<FimLinha>,op_aritmetico <ConteudoCondicaoWhile>,op_relacional <ConteudoCondicaoWhile>,,,,,,,,,,,,,,or <ConteudoCondicaoWhile>,,and <ConteudoCondicaoWhile>,,,,,,
-<ConteudoCondicao>,par_esq <ConteudoCondicao>,,,,,,,int <ConteudoCondicao'>,float <ConteudoCondicao'>,id <ConteudoCondicao'>,string <ConteudoCondicao'>,,,,,,,,,,,,,,,,,,
-<ConteudoCondicao'>,,par_dir <ConteudoCondicao>,col_esq <program> col_dir,,,op_aritmetico <ConteudoCondicao>,op_relacional <ConteudoCondicao>,,,,,,,,,,,,,,or <ConteudoCondicao>,,and <ConteudoCondicao>,,,,,,
-<FinalCond>,,,,,<FimLinha>,,,,,,,,,,,,,,,,,,,else col_esq <program> col_dir <FimLinha>,,,,,
-<ConteudoFor>,,,,,,,,,,id <ValorInicial> virgula <ConteudoCondicaoFor> id <Increm_decrem> col_esq <program> col_dir <FimLinha>,,,,,,,,,,,,,,,col_esq <program> col_dir <FimLinha>,,,,
-<ValorInicial>,,,,,,,,,,,,atribuicao <DadosAtrib>,,,,,,,,,,,,,,,,,
-<DadosAtrib>,,,,,,,,int,float,id,,,,,,,,,,,,,,,,,,,
-<Increm_decrem>,,,,,,,,,,,,,,,,,incremento,decremento,,,,,,,,,,,
-<ConteudoCondicaoFor'>,,par_dir <ConteudoCondicaoFor'>,,,,op_aritmetico <ConteudoCondicaoFor>,op_relacional <ConteudoCondicaoFor>,,,,,,,,,,,,,,or <ConteudoCondicaoFor>,,and <ConteudoCondicaoFor>,,,,,,virgula
+,par_esq,par_dir,col_esq,col_dir,fim_linha,op_aritmetico,op_relacional,int,float,id,string,atribuicao,idInt,idFloat,idString,idBoolean,incremento,decremento,if,input,or,output,and,else,for,not,while,do,virgula,$
+<program>,,,,<Vazio>,,,,,,<Identificador>,,,<IdentificadorTipo>,<IdentificadorTipo>,<IdentificadorTipo>,<IdentificadorTipo>,,,<LacoECondicao>,,,<SaidaDados>,,,<LacoECondicao>,,,<LacoECondicao>,,sinc
+<IdentificadorTipo>,,,,sinc,,,,,,,,,idInt <Identificador>,idFloat <Identificador>,idString <Identificador>,idBoolean <Identificador>,,,,,,,,,,,,,,sinc
+<Identificador>,,,,sinc,,,,,,id <AuxIdent>,,,,,,,,,,,,,,,,,,,,sinc
+<AuxIdent>,,,,sinc,<FimLinha>,,,,,,,<Atribuicao>,,,,,,,,,,,,,,,,,,sinc
+<Dados>,par_esq <Dados> par_dir,sinc,,sinc,,,,int <Dados'>,float <Dados'>,id <Dados'>,string <Dados'>,,,,,,,,,,,,,,,,,,,sinc
+<Dados'>,,sinc,,sinc,<FimLinha>,op_aritmetico <Dados>,,<Dados>,<Dados>,<Dados>,<Dados>,,,,,,,,,,,,,,,,,,,sinc
+<Atribuicao>,,,,sinc,,,,,,,,atribuicao <AuxAtribuicao>,,,,,,,,,,,,,,,,,,sinc
+<AuxAtribuicao>,,,,sinc,,,,<Dados>,<Dados>,<Dados>,<Dados>,,,,,,,,,<EntradaDados>,,,,,,,,,,sinc
+<FimLinha>,,sinc,,sinc,fim_linha <program>,,,,,,,,,,,,,,,,,,,,,,,,,sinc
+<EntradaDados>,,,,sinc,,,,,,,,,,,,,,,,input <Parenteses> <FimLinha>,,,,,,,,,,sinc
+<Parenteses>,par_esq par_dir,,,,sinc,,,,,,,,,,,,,,,,,,,,,,,,,
+<SaidaDados>,,,,sinc,,,,,,,,,,,,,,,,,,output <ConteudoSaida> <FimLinha>,,,,,,,,sinc
+<ConteudoSaida>,par_esq <ConteudoSaida'> par_dir,,,,sinc,,,,,,,,,,,,,,,,,,,,,,,,,
+<ConteudoSaida'>,,sinc,,,,,,,,id,string,,,,,,,,,,,,,,,,,,,
+<LacoECondicao>,,,,sinc,,,,,,,,,,,,,,,if <ConteudoCondicao> <FinalCond>,,,,,,for <ConteudoFor>,,,do <ConteudoDO> while <ConteudoCondicaoWhile>,,sinc
+<ConteudoDO>,,,col_esq <program> col_dir,sinc,,,,,,sinc,,,,,,,,,,,,,,,,,,,,
+<ConteudoCondicaoWhile>,par_esq <ConteudoCondicaoWhile>,,,sinc,,,,int <ConteudoCondicaoWhile'>,float <ConteudoCondicaoWhile'>,id <ConteudoCondicaoWhile'>,string <ConteudoCondicaoWhile'>,,,,,,,,,,,,,,,,,,,sinc
+<ConteudoCondicaoFor>,par_esq <ConteudoCondicaoFor>,sinc,,,,,,int <ConteudoCondicaoFor'>,float <ConteudoCondicaoFor'>,id <ConteudoCondicaoFor'>,string <ConteudoCondicaoFor'>,,,,,,,,,,,,,,,,,,,
+<ConteudoCondicaoWhile'>,,par_dir <ConteudoCondicaoWhile'>,,sinc,<FimLinha>,op_aritmetico <ConteudoCondicaoWhile>,op_relacional <ConteudoCondicaoWhile>,,,,,,,,,,,,,,or <ConteudoCondicaoWhile>,,and <ConteudoCondicaoWhile>,,,,,,,sinc
+<ConteudoCondicao>,par_esq <ConteudoCondicao>,sinc,,,sinc,,,int <ConteudoCondicao'>,float <ConteudoCondicao'>,id <ConteudoCondicao'>,string <ConteudoCondicao'>,,,,,,,,,,,,,sinc,,,,,,
+<ConteudoCondicao'>,,par_dir <ConteudoCondicao>,col_esq <program> col_dir,,sinc,op_aritmetico <ConteudoCondicao>,op_relacional <ConteudoCondicao>,,,,,,,,,,,,,,or <ConteudoCondicao>,,and <ConteudoCondicao>,sinc,,,,,,
+<FinalCond>,,,,sinc,<FimLinha>,,,,,,,,,,,,,,,,,,,else col_esq <program> col_dir <FimLinha>,,,,,,sinc
+<ConteudoFor>,,,,sinc,,,,,,id <ValorInicial> virgula <ConteudoCondicaoFor> id <Increm_decrem> col_esq <program> col_dir <FimLinha>,,,,,,,,,,,,,,,col_esq <program> col_dir <FimLinha>,,,,,sinc
+<ValorInicial>,,,,,,,,,,,,atribuicao <DadosAtrib>,,,,,,,,,,,,,,,,,sinc,
+<DadosAtrib>,,,,,,,,int,float,id,,,,,,,,,,,,,,,,,,,sinc,
+<Increm_decrem>,,,sinc,,,,,,,,,,,,,,incremento,decremento,,,,,,,,,,,,
+<ConteudoCondicaoFor'>,,par_dir <ConteudoCondicaoFor'>,,,,op_aritmetico <ConteudoCondicaoFor>,op_relacional <ConteudoCondicaoFor>,,,sinc,,,,,,,,,,,or <ConteudoCondicaoFor>,,and <ConteudoCondicaoFor>,,,,,,virgula,
