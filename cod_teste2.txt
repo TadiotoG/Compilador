@@ -2,7 +2,7 @@ int x;
 x := input();
 
 int pot;
-pot := input();
+pot := input()
 
 int mult;
 mult := x;

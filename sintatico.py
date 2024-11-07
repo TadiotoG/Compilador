@@ -30,7 +30,7 @@ class Sintatico:
             
             if len(self.entrada) == 1 and len(self.pilha) == 1 and self.entrada[0] == self.pilha[-1] == '$':
                 if erro > 1:
-                    print("Aceito com ", erro, " erros!")
+                    print("Aceito com erros!")
 
                 else:
                     print("Aceito!")
