@@ -46,12 +46,12 @@ class Sintatico:
                             #print("Verificando", self.regras[0][j] , topo)
                             if self.regras[0][j] == topo:
                                 
-                                print("Entrada", topo)
+                                print("Entrada", topo, " gostaria de saber:", len(self.pilha))
                                 print("Pilha[", len(self.pilha)-1, "]:", self.pilha[-1])
                                 print(i , j)
                                 print(self.regras[i][j])
                                 if self.regras[i][j] != '' and self.regras[i][j] != 'sinc':
-                                    
+
                                     #print(self.regras[i][j])
                                     producao = self.regras[i][j]  
                                     producao = producao.split(" ")  
