@@ -1,3 +1,6 @@
+# Aluno: Gabriel Tadioto Oliveira e David Antonio Brocardo
+# Trabalho de Compiladores - 2
+
 import csv
 from lexico import Automato
 
