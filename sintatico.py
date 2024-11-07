@@ -36,7 +36,7 @@ class Sintatico:
                     print("Aceito com erros!")
 
                 else:
-                    print("Aceito!")
+                    print("Aceito sem erros!")
                 break
 
             topo = self.entrada[posi_entrada] if len(self.entrada) != 0 else "gambiarra"
@@ -79,7 +79,7 @@ class Sintatico:
                     break
 
 my_lex = Automato()  
-my_lex.read_file("cod_teste2.txt")
+my_lex.read_file("cod_teste.txt")
 my_lex.analyzes_code()
 
 tokens_solo = [i[1] for i in my_lex.tokens if i[1] != "ContraBarraN" and i[1] != "comentario"]
