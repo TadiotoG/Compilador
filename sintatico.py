@@ -79,7 +79,7 @@ class Sintatico:
                     break
 
 my_lex = Automato()  
-my_lex.read_file("cod_teste.txt")
+my_lex.read_file("cod_teste3.txt")
 my_lex.analyzes_code()
 
 tokens_solo = [i[1] for i in my_lex.tokens if i[1] != "ContraBarraN" and i[1] != "comentario"]
