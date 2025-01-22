@@ -1,5 +1,3 @@
 if gabriel < 3 {
     output("baixo");
-}
-
-output ("A");
+};

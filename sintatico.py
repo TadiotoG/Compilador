@@ -25,15 +25,15 @@ class Sintatico:
         posi_entrada = 0
         controle = 1
         erro = 0
-        while controle > 0:
+        while controle > 0 and controle < 1000:
             print("----- Rodada ", controle, " -----")
             print("Entrada ", self.entrada)
             print("Pilha ", self.pilha, "\n\n")
             controle += 1
             
             if len(self.entrada) == 1 and len(self.pilha) == 1 and self.entrada[0] == self.pilha[-1] == '$':
-                if erro > 1:
-                    print("Aceito com erros!")
+                if erro > 0:
+                    print("Aceito com ", erro, " erros! ")
 
                 else:
                     print("Aceito sem erros!")
@@ -79,7 +79,7 @@ class Sintatico:
                     break
 
 my_lex = Automato()  
-my_lex.read_file("cod_teste3.txt")
+my_lex.read_file("cod_teste.txt")
 my_lex.analyzes_code()
 
 tokens_solo = [i[1] for i in my_lex.tokens if i[1] != "ContraBarraN" and i[1] != "comentario"]

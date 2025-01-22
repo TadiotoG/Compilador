@@ -1,5 +1,5 @@
 ,par_esq,par_dir,col_esq,col_dir,fim_linha,op_aritmetico,op_relacional,int,float,id,string,atribuicao,idInt,idFloat,idString,idBoolean,incremento,decremento,if,input,or,output,and,else,for,not,while,do,virgula,$
-<program>,,,,<Vazio>,,,,,,<Identificador>,,,<IdentificadorTipo>,<IdentificadorTipo>,<IdentificadorTipo>,<IdentificadorTipo>,,,<LacoECondicao>,,,<SaidaDados>,,,<LacoECondicao>,,,<LacoECondicao>,,sinc
+<program>,,,,<Vazio>,,,,,,<Identificador>,,,<IdentificadorTipo>,<IdentificadorTipo>,<IdentificadorTipo>,<IdentificadorTipo>,,,<LacoECondicao>,,,<SaidaDados>,,,<LacoECondicao>,,,<LacoECondicao>,,<Vazio>
 <IdentificadorTipo>,,,,sinc,,,,,,,,,idInt <Identificador>,idFloat <Identificador>,idString <Identificador>,idBoolean <Identificador>,,,,,,,,,,,,,,sinc
 <Identificador>,,,,sinc,,,,,,id <AuxIdent>,,,,,,,,,,,,,,,,,,,,sinc
 <AuxIdent>,,,,sinc,<FimLinha>,,,,,,,<Atribuicao>,,,,,,,,,,,,,,,,,,sinc
