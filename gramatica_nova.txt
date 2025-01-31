@@ -6,7 +6,7 @@
 
 <AuxIdent> := <Atribuição> | <FimLinha> 
 
-<Dados> :=  id<Dados'> | string<Dados'> | int<Dados'> | float<Dados'> | par_esq<Dados>par_dir 
+<Dados> :=  id<Dados'> | string<Dados'> | int<Dados'> | float<Dados'> | par_esq<Dados>par_dir         <<<< NA VERDADE NAO FUNCIONA O PARENTESES
 
 <Dados'> : = <Dados> | <FimLinha> | op_aritmetico <Dados> 
 

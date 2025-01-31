@@ -1,3 +1,8 @@
+int carlinhos;
+int gabriel;
+
+gabriel := carlinhos * 3;
+
 if gabriel < 3 {
     output("baixo");
 };

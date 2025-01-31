@@ -17,11 +17,6 @@ class Automato:
     def read_file(self, file_name):
         with open(file_name, "r") as reading:
             self.code_enter = reading.readlines()
-            # i=0
-            # #print(self.code_enter)
-            # for self.code_enter in self.code_enter:
-            #    self.code.insert(i,self.code_enter.split())
-            #    i += 1
             
 
     def analyzes_code(self):
