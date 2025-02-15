@@ -1,8 +1,5 @@
-int carlinhos;
 int gabriel;
+int carlinhos := 2;
+gabriel := 20.9 + 20;
+gabriel := carlinhos * "jacu" + 20;
 
-gabriel := carlinhos * 3;
-
-if gabriel < 3 {
-    output("baixo");
-};

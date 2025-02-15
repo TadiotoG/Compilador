@@ -24,7 +24,7 @@ class Sintatico:
             if(self.tabela_simbolos["cod"][i] == string):
                 return i
         return -1
-    
+        
     def append_tab_simbolo(self, token, cod, util):
             self.tabela_simbolos["token"].append(token)
             self.tabela_simbolos["cod"].append(cod)
@@ -71,8 +71,8 @@ class Sintatico:
 
             topo = self.entrada[posi_entrada] if len(self.entrada) != 0 else "solucao"
 
-            # print("Entrada -> ", self.entrada)
-            # print("Cod real -> ", self.codigo_real, "\n")
+            #print("Entrada -> ", self.entrada)
+            #print("Cod real -> ", self.codigo_real, "\n")
 
             # Semantico
             if(len(self.codigo_real) and self.codigo_real[0] != "ja_computado"):
@@ -81,10 +81,10 @@ class Sintatico:
                         print(f"Palavra {self.entrada[1]} reservada!, na linha {linha}")
                         erro += 1
                     elif(self.entrada[2] == "atribuicao" and (self.entrada[3] == "int" or self.entrada[3] == "string" or self.entrada[3] == "float" or self.entrada[3] == "id")):
-                        self.append_tab_simbolo(self.entrada[1], self.codigo_real[1], True)
+                        self.append_tab_simbolo(self.entrada[0], self.codigo_real[1], True)
                         self.codigo_real[1] = "ja_computado" # Na declaracao, ja coloca esse ja_computado no cod do id, pra nao precisar analisar ele depois
                     else:
-                        self.append_tab_simbolo(self.entrada[1], self.codigo_real[1], False)
+                        self.append_tab_simbolo(self.entrada[0], self.codigo_real[1], False)
                         self.codigo_real[1] = "ja_computado" # Na declaracao, ja coloca esse ja_computado no cod do id, pra nao precisar analisar ele depois
 
                 elif(self.entrada[0] == "id" and self.entrada[1] == "atribuicao"):
@@ -95,6 +95,33 @@ class Sintatico:
                         # print("TAB ", self.tabela_simbolos)
                     else:
                         self.tabela_simbolos["utilizada"][pos] = True
+                        
+                        i = 2
+                        while(self.entrada[i-1] != "fim_linha"):
+                            if (self.tabela_simbolos["token"][pos] != "idString"):
+                                if (self.entrada[i] == "id"):
+                                    pos2 = self.procura_cod_tab_sim(self.entrada[i])
+                                    #print(self.tabela_simbolos["token"][pos2])
+                                    if(self.tabela_simbolos["token"][pos2] == "idString"):
+                                        print(f"Atribuição de valor invalido para a variável {self.codigo_real[0]}, na linha {linha}")
+                                        erro += 1
+                                        break
+                                    else:
+                                        i=i+2
+                                elif(self.entrada[i] != "int" and self.entrada[i] != "float" ):                                    
+                                    print(f"Atribuição de valor invalido para a variável {self.codigo_real[0]}, na linha {linha}")
+                                    erro += 1
+                                    break
+                                else:
+                                    i=i+2
+                            else:
+                                if (self.entrada[i] == "id" or self.entrada[i] == "int" or  self.entrada[i] == "float" ):
+                                    print(f"Atribuição de valor invalido para a variável {self.codigo_real[0]}, na linha {linha}")
+                                    erro += 1
+                                    break
+                                else:
+                                        i=i+2
+                            
                     self.codigo_real[0] = "ja_computado"
 
                 elif(self.entrada[0] == "id" and self.entrada[1] != "atribuicao"):
