@@ -194,37 +194,7 @@ class Sintatico:
                             if (self.verifica_atribuicao(pos,linha,2) == -1):
                                 erro += 1
                         
-                        """self.tabela_simbolos["utilizada"][pos] = True
-                        i = 2                        
-                        while(self.entrada[i-1] != "fim_linha"):
-                            if (self.tabela_simbolos["token"][pos] != "idString"):
-                                if (self.entrada[i] == "id"):
-                                    pos2 = self.procura_cod_tab_sim(self.entrada[i])
-                                    #print(self.tabela_simbolos["token"][pos2])
-                                    if(self.tabela_simbolos["token"][pos2] == "idString"):
-                                        print(f"Atribuição de valor invalido para a variável {self.codigo_real[0]}, na linha {linha}")
-                                        erro += 1
-                                        break
-                                    else:
-                                        i=i+2
-                                elif(self.entrada[i] != "int" and self.entrada[i] != "float" ):                                    
-                                    print(f"Atribuição de valor invalido para a variável {self.codigo_real[0]}, na linha {linha}")
-                                    erro += 1
-                                    break
-                                else:
-                                    if (self.entrada[i] == "float" and self.tabela_simbolos["token"][pos] == "idInt"):
-                                        print(f"Atribuição de valor invalido para a variável {self.codigo_real[0]}, na linha {linha}")
-                                        erro += 1
-                                        break
-                                    else:
-                                        i=i+2
-                            else:
-                                if (self.entrada[i] == "id" or self.entrada[i] == "int" or  self.entrada[i] == "float" ):
-                                    print(f"Atribuição de valor invalido para a variável {self.codigo_real[0]}, na linha {linha}")
-                                    erro += 1
-                                    break
-                                else:
-                                        i=i+2"""
+                        
                             
                     self.codigo_real[0] = "ja_computado"
 
