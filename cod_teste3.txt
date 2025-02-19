@@ -3,7 +3,7 @@
 @carlinhos := carlinhos * 20.9;
 int jacu := 202 + 20;
 int i;
-boolean j = 5;
+boolean j := 5;
 j = 1;
 for i := 0 , i < 20, i++ {
     int x := 2;

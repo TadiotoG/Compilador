@@ -1,0 +1,5 @@
+a : i32 = 2
+c : f64 = 2.5
+h : i32 = a
+g : f64 = c
+Declaracao de string! ainda nao resolvida

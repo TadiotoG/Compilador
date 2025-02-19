@@ -1,0 +1,7 @@
+int a := 2;
+float c := 2.5;
+int h := a;
+float g := c;
+
+string b;
+b := 0 + 1;
