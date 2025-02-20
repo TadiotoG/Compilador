@@ -4,7 +4,7 @@
 <Identificador>,,,,sinc,,,,,,id <AuxIdent>,,,,,,,,,,,,,,,,,,,,sinc
 <AuxIdent>,,,,sinc,<FimLinha>,,,,,,,<Atribuicao>,,,,,,,,,,,,,,,,,,sinc
 <Dados>,par_esq <Dados> par_dir,sinc,,sinc,,,,int <Dados'>,float <Dados'>,id <Dados'>,string <Dados'>,,,,,,,,,,,,,,,,,,,sinc
-<Dados'>,,sinc,,sinc,<FimLinha>,op_aritmetico <Dados>,,<Dados>,<Dados>,<Dados>,<Dados>,,,,,,,,,,,,,,,,,,,sinc
+<Dados'>,,sinc,,sinc,<FimLinha>,op_aritmetico <Dados>,,<Dados>,<Dados>,<Dados>,<Dados>,,,,,,,,,,or <Dados>,,and <Dados>,,,,,,,sinc
 <Atribuicao>,,,,sinc,,,,,,,,atribuicao <AuxAtribuicao>,,,,,,,,,,,,,,,,,,sinc
 <AuxAtribuicao>,,,,sinc,,,,<Dados>,<Dados>,<Dados>,<Dados>,,,,,,,,,<EntradaDados>,,,,,,,,,,sinc
 <FimLinha>,,sinc,,sinc,fim_linha <program>,,,,,,,,,,,,,,,,,,,,,,,,,sinc

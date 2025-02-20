@@ -3,7 +3,7 @@
 @carlinhos := carlinhos * 20.9;
 int jacu := 202 + 20;
 int i;
-boolean j := 5;
+boolean j := 1;
 j = 1;
 for i := 0 , i < 20, i++ {
     int x := 2;
@@ -19,5 +19,9 @@ if x > 100 {
     output("Numero maior que 100");
 } else {
     output("Numero menor que 100");
-};
 x := 10;
+
+
+
+ 
+ 

@@ -1,7 +1,31 @@
 int a := 2;
 float c := 2.5;
 int h := a;
-float g := c;
+float g := 1;
+int i;
+boolean j := 1 or 0;
+j := 1 and 1;
 
-string b;
-b := 0 + 1;
+do {
+    int unio := 0; 	
+    for i := 0 , i < 20, i++ {
+        int x := 2;
+        int mult := 23;
+        x := x * mult; 
+        for x := 0 , i < 20, i++ {
+            int y;
+            if a > 100 {
+                int jacu ;
+                if a > 100 {
+                    int pacu;
+                    output("Numero maior que 100");
+                }; 
+                pacu:= 2;
+            }; 
+            jacu := 2;
+        };  
+        y := 2;
+    };
+    x := 1;	     
+} while (i > 2) ;
+unio := 2;

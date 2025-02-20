@@ -60,7 +60,10 @@ class Sintatico:
                         elif(self.tabela_simbolos["token"][pos] == "idInt" and self.tabela_simbolos["token"][pos2] == "idFloat"): # se ele é um inteiro a var ser atribuido a ele é float
                             print(f"Atribuição de variavel float para variavel inteira {self.codigo_real[pos_print]}, na linha {linha}")
                             return -1
-                        else:
+                        elif(self.entrada[i+1] == "and" or  self.entrada[i+1] == "or"):
+                            print(f"Atribuição de variavel boleano para variavel numérica {self.codigo_real[pos_print]}, na linha {linha}")
+                            return -1
+                        else:                            
                             i=i+2
 
                     elif(self.entrada[i] != "int" and self.entrada[i] != "float" ):                                    
@@ -69,6 +72,9 @@ class Sintatico:
                     else:
                         if (self.entrada[i] == "float" and self.tabela_simbolos["token"][pos] == "idInt"):
                             print(f"Atribuição de float para variavel inteira {self.codigo_real[pos_print]}, na linha {linha}")
+                            return -1
+                        elif(self.entrada[i+1] == "and" or  self.entrada[i+1] == "or"):
+                            print(f"Atribuição de variavel boleano para variavel numérica {self.codigo_real[pos_print]}, na linha {linha}")
                             return -1
                         else:
                             i=i+2
@@ -141,9 +147,9 @@ class Sintatico:
         codAsString = "" # String para armazenar o cod gerado
 
         while controle < 1000:
-            # print("----- Rodada ", controle, " -----")
-            # print("Entrada ", self.entrada)
-            # print("Pilha ", self.pilha, "\n\n")
+            #print("----- Rodada ", controle, " -----")
+            #print("Entrada ", self.entrada)
+            #print("Pilha ", self.pilha, "\n\n")
             controle += 1
 
             pula_linha = True
@@ -164,9 +170,9 @@ class Sintatico:
 
             topo = self.entrada[posi_entrada] if len(self.entrada) != 0 else "solucao"
 
-            # print("Entrada -> ", self.entrada)
-            # print("Cod real -> ", self.codigo_real, "\n")
-            # print(self.tabela_simbolos)
+            #print("Entrada -> ", self.entrada)
+            #print("Cod real -> ", self.codigo_real, "\n")
+            #print(self.tabela_simbolos)
             '''
             Entrada ->  ['for', 'id', 'atribuicao', 'int', 'virgula', 'id', 'op_relacional', 'int', 'virgula', 'id', 'incremento', 'col_esq', 'idInt', 'id', 'atribuicao', 'int', 'fim_linha', 'idInt', 'id', 'atribuicao', 'int', 'fim_linha', 'id', 'atribuicao', 'id', 'op_aritmetico', 'id', 'fim_linha', 'col_dir', 'fim_linha', '$']
             Cod real ->  ['for', 'i', ':=', '0', ',', 'i', '<', '20', ',', 'i', '++', '{', '\n', 'int', 'x', ':=', '2', ';', '\n', 'int', 'mult', ':=', '23', ';', '\n', 'x', ':=', 'x', '*', 'mult', ';', '\n', '}', ';', '\n', '\n', '\n']
@@ -234,27 +240,41 @@ class Sintatico:
                                 del self.tabela_laco["cod"][i]      
                                 del self.tabela_laco["laco"][i]  
                         
+                        
                         laco = laco -1
  
                     self.codigo_real[0] = "ja_computado"
                     self.codigo_real[1] = "ja_computado"
-                elif(self.entrada[0] == "for"):            
+
+                elif(self.entrada[0] == "for" or self.entrada[0] == "if" ): 
+                    print(self.entrada[0])         
                     pos = self.procura_cod_tab_sim(self.codigo_real[1])
+                    
                     if(pos == -1):
                         print(f"Variavel {self.codigo_real[0]} nao declarada, na linha {linha}")
                         erro += 1
                         # print("TAB ", self.tabela_simbolos)
                     else:
                         self.tabela_simbolos["utilizada"][pos] = True
-                        if (self.tabela_simbolos["token"][pos] != "idString" and self.tabela_simbolos["token"][pos] != "idBoolean"):
-                            if (self.entrada[3] == "float" and self.tabela_simbolos["token"][pos] == "idInt"):
-                                print(f"Atribuição de valor invalido para a variável {self.codigo_real[1]}, na linha {linha}")
-                                erro += 1
-                            else:
-                                laco = laco + 1
-                                self.codigo_real[1] = "ja_computado"                           
+                        if (self.entrada[0] == "for" ):
+                            if (self.tabela_simbolos["token"][pos] != "idString" and self.tabela_simbolos["token"][pos] != "idBoolean"):
+                                if (self.entrada[3] == "float" and self.tabela_simbolos["token"][pos] == "idInt"):
+                                    print(f"Atribuição de valor invalido para a variável {self.codigo_real[1]}, na linha {linha}")
+                                    erro += 1
+                                else:
+                                    laco = laco + 1
+                                    self.codigo_real[1] = "ja_computado"   
+                        else:
+                            laco = laco + 1
+                            self.codigo_real[1] = "ja_computado"                         
                     self.codigo_real[0] = "ja_computado"
                 
+                elif(self.entrada[0] == "for" or self.entrada[0] == "if" or self.entrada[0] == "do"): 
+                    print(self.entrada[0])         
+                    laco = laco + 1
+                    self.codigo_real[1] = "ja_computado"                         
+                    self.codigo_real[0] = "ja_computado"
+                    
                 elif(self.entrada[0] == "id" and self.entrada[1] == "atribuicao"):
                     pos = self.procura_cod_tab_sim(self.codigo_real[0])
                     self.tabela_simbolos["utilizada"][pos] = True
@@ -331,7 +351,7 @@ class Sintatico:
                     file.write(codAsString)
 
 my_lex = Automato()  
-my_lex.read_file("cod_teste3.txt")
+my_lex.read_file("cod_teste2.txt")
 my_lex.analyzes_code()
 
 tokens_solo = [i[1] for i in my_lex.tokens if i[1] != "ContraBarraN" and i[1] != "comentario"]
