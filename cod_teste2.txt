@@ -20,12 +20,12 @@ do {
                     int pacu;
                     output("Numero maior que 100");
                 }; 
-                pacu:= 2;
+                @pacu:= 2;
             }; 
-            jacu := 2;
+            @jacu := 2;
         };  
-        y := 2;
+        @y := 2;
     };
-    x := 1;	     
-} while (i > 2) ;
-unio := 2;
+    @x := 1;	     
+} while i > 2 ;
+@unio := 2;

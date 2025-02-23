@@ -15,10 +15,12 @@ class Sintatico:
         self.pilha.append('<program>')
         self.read_file('Tabela_Regras.csv')
         # print("Entrada: ", self.entrada)
+        self.lista_laco = []
         self.analise_sintatica()
         self.erro = 0
         self.tabela_laco= {}
         self.tabela_simbolos = {}
+        
         
     
     def procura_cod_tab_sim(self, string):
@@ -121,6 +123,8 @@ class Sintatico:
                     i += 1
             return 0
 
+        
+
     def read_file(self, file_name):
         with open(file_name, mode='r', newline='', encoding='utf-8') as arquivo_csv:
             leitor_csv = csv.reader(arquivo_csv)
@@ -143,6 +147,7 @@ class Sintatico:
         
         linha = 1
         laco = 0
+        laco_saida = 0;
         temp = 0 # Variavel utilizada para geracao de cod
         codAsString = "" # String para armazenar o cod gerado
 
@@ -204,8 +209,25 @@ class Sintatico:
                         codAsString += self.codigo_real[0] + ": " + "bool = " + self.codigo_real[2] + "\n"
 
                     if(self.tabela_simbolos["token"][pos] == "idString" and self.entrada[1] == "atribuicao"):
-                        codAsString += "Declaracao de string! ainda nao resolvida" + "\n"
+                        codAsString += "Declaracao de string! ainda nao resolvida" + "\n"  
 
+                if(self.entrada[0] == "col_dir" and self.entrada[1] == "fim_linha" ):   
+                    if laco != 0:      
+                        if(self.lista_laco[(laco)-1] != "if"):                       
+                            codAsString += "end: \n" + "  goto end \n"
+                            laco_saida -=2
+
+                elif(self.entrada[0] == "col_dir" and self.entrada[1] == "while"):
+                    print(self.codigo_real)
+                    laco_saida += 2 # Depois de tiver uma variavel para os registradores da pra so trocar
+                    if (self.entrada[2] == "par_esq"):
+                        posi = 4
+                    else: 
+                        posi= 3
+                    codAsString += "T"+str(laco_saida)+" : bool = T"+str(laco_saida-1)+" " + self.codigo_real[posi] + " " + self.codigo_real[(posi+1)] + "\n"
+                    codAsString += "IF T"+str(laco_saida)+" goto loop\n"
+                    codAsString += "end: \n" + "  goto end \n"
+                    laco_saida -=2
             # Semantico
             if(len(self.codigo_real) and self.codigo_real[0] != "ja_computado"): # Se ainda tem codigo e ele ainda nao foi computado
                 if(self.entrada[0] == "idInt" or self.entrada[0] == "idFloat" or self.entrada[0] == "idBoolean" or self.entrada[0] == "idString"): # Se o codigo for uma declaracao
@@ -240,14 +262,15 @@ class Sintatico:
                                 del self.tabela_laco["cod"][i]      
                                 del self.tabela_laco["laco"][i]  
                         
-                        
+                        del self.lista_laco[-1]
                         laco = laco -1
+                        
  
                     self.codigo_real[0] = "ja_computado"
                     self.codigo_real[1] = "ja_computado"
 
                 elif(self.entrada[0] == "for" or self.entrada[0] == "if" ): 
-                    print(self.entrada[0])         
+                            
                     pos = self.procura_cod_tab_sim(self.codigo_real[1])
                     
                     if(pos == -1):
@@ -257,21 +280,47 @@ class Sintatico:
                     else:
                         self.tabela_simbolos["utilizada"][pos] = True
                         if (self.entrada[0] == "for" ):
+                            #print(self.entrada)
+                            codAsString += "loop: \n" 
                             if (self.tabela_simbolos["token"][pos] != "idString" and self.tabela_simbolos["token"][pos] != "idBoolean"):
+
                                 if (self.entrada[3] == "float" and self.tabela_simbolos["token"][pos] == "idInt"):
                                     print(f"Atribuição de valor invalido para a variável {self.codigo_real[1]}, na linha {linha}")
                                     erro += 1
-                                else:
+                                else:       
                                     laco = laco + 1
-                                    self.codigo_real[1] = "ja_computado"   
+                                    laco_saida += 1 # Depois de tiver uma variavel para os registradores da pra so trocar
+                                    self.codigo_real[1] = "ja_computado"  
+
+
+                                    if(self.tabela_simbolos["token"][pos] == "idInt"):
+                                        if (self.entrada[10] == "incremento"):
+                                            codAsString += "  T"+str(laco_saida)+" : i32 = T"+str(laco_saida)+" + 1" + "\n"
+                                        else:
+                                            codAsString += "  T"+str(laco_saida)+": i32 = T"+str(laco_saida)+" - 1" + "\n"
+
+                                    if(self.tabela_simbolos["token"][pos] == "idFloat"):
+                                        if (self.entrada[10] == "incremento"):
+                                            codAsString += "  T"+str(laco_saida)+": f64 = T"+str(laco_saida)+" + 1" + "\n"
+                                        else:
+                                            codAsString += "  T"+str(laco_saida)+": f64 = T"+str(laco_saida)+" - 1" + "\n"
+                                    laco_saida += 1
+                                    codAsString += "  T"+str(laco_saida)+" : bool = T"+str(laco_saida-1)+" " + self.codigo_real[6] + " " + self.codigo_real[7] + "\n"
+                                    codAsString += "  IF T"+str(laco_saida)+" goto loop\n"
+
+
+                                    self.lista_laco.append("for") 
+                                     
                         else:
                             laco = laco + 1
+                            self.lista_laco.append("if") 
                             self.codigo_real[1] = "ja_computado"                         
                     self.codigo_real[0] = "ja_computado"
                 
-                elif(self.entrada[0] == "for" or self.entrada[0] == "if" or self.entrada[0] == "do"): 
-                    print(self.entrada[0])         
+                elif(self.entrada[0] == "do"):       
+                    codAsString += "loop: \n"  
                     laco = laco + 1
+                    self.lista_laco.append("do") 
                     self.codigo_real[1] = "ja_computado"                         
                     self.codigo_real[0] = "ja_computado"
                     
