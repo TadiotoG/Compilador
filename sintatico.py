@@ -59,9 +59,9 @@ class Sintatico:
                             print(f"Atribuição de variavel boleano para variavel numérica {self.codigo_real[pos_print]}, na linha {linha}")
                             return -1
                         
-                        elif(self.tabela_simbolos["token"][pos] == "idInt" and self.tabela_simbolos["token"][pos2] == "idFloat"): # se ele é um inteiro a var ser atribuido a ele é float
-                            print(f"Atribuição de variavel float para variavel inteira {self.codigo_real[pos_print]}, na linha {linha}")
-                            return -1
+                        # elif(self.tabela_simbolos["token"][pos] == "idInt" and self.tabela_simbolos["token"][pos2] == "idFloat"): # se ele é um inteiro a var ser atribuido a ele é float
+                        #     print(f"Atribuição de variavel float para variavel inteira {self.codigo_real[pos_print]}, na linha {linha}")
+                        #     return -1
                         elif(self.entrada[i+1] == "and" or  self.entrada[i+1] == "or"):
                             print(f"Atribuição de variavel boleano para variavel numérica {self.codigo_real[pos_print]}, na linha {linha}")
                             return -1
@@ -72,10 +72,10 @@ class Sintatico:
                         print(f"Atribuição de valor invalido para a variável {self.codigo_real[pos_print]}, na linha {linha}")
                         return -1
                     else:
-                        if (self.entrada[i] == "float" and self.tabela_simbolos["token"][pos] == "idInt"):
-                            print(f"Atribuição de float para variavel inteira {self.codigo_real[pos_print]}, na linha {linha}")
-                            return -1
-                        elif(self.entrada[i+1] == "and" or  self.entrada[i+1] == "or"):
+                        # if (self.entrada[i] == "float" and self.tabela_simbolos["token"][pos] == "idInt"):
+                        #     print(f"Atribuição de float para variavel inteira {self.codigo_real[pos_print]}, na linha {linha}")
+                        #     return -1
+                        if(self.entrada[i+1] == "and" or  self.entrada[i+1] == "or"):
                             print(f"Atribuição de variavel boleano para variavel numérica {self.codigo_real[pos_print]}, na linha {linha}")
                             return -1
                         else:
@@ -93,12 +93,12 @@ class Sintatico:
                             print(f"Atribuição de variavel boleana para variavel string {self.codigo_real[pos_print]}, na linha {linha}")
                             return -1
                         
+                        else:
+                            i=i+2
+                        
                     elif(self.entrada[i] != "string"):                                    
                         print(f"Atribuição de valor invalido para a variável string {self.codigo_real[pos_print]}, na linha {linha}")
                         return -1
-                    
-                    else:
-                            i=i+2
 
                 elif(self.tabela_simbolos["token"][pos] == "idBoolean"): # se é um boolean
                     if (self.entrada[i] == "id"): # quem esta sendo atribuido é variavel
@@ -112,18 +112,92 @@ class Sintatico:
                             print(f"Atribuição de variavel string para variavel boleana {self.codigo_real[pos_print]}, na linha {linha}")
                             return -1
                         
+                        else:
+                            i=i+2
+                        
                     elif(self.codigo_real[i] != '0' and self.codigo_real[i] != '1'):                                    
                         print(f"Atribuição de valor invalido para a variavel boleana {self.codigo_real[pos_print]}, na linha {linha}")
                         return -1
                     
                     else:
-                            i=i+2
-
+                        i=i+2
                 else:
                     i += 1
             return 0
+    
+    def generate_atribuicao(self, i):
+        # str_generated = self.codigo_real[i]
+        str_generated = ""
+        id_str = self.entrada[i]
 
+        if(id_str == "idInt" and self.entrada[i+2] == "atribuicao"): # Declara e ja atribui valor
+            str_generated += self.codigo_real[i+1] + ": i32 = "
+
+        if(id_str == "idFloat" and self.entrada[i+2] == "atribuicao"):
+            str_generated += self.codigo_real[i+1] + ": f64 = "
+
+        if(id_str == "idBoolean" and self.entrada[i+2] == "atribuicao"):
+            str_generated += self.codigo_real[i+1] + ": bool = "
+
+        if(id_str == "idString" and self.entrada[i+2] == "atribuicao"):
+            str_generated += "Declaracao de string! ainda nao resolvida"
+
+        if(id_str == "id"): # Variavel ja existe 
+            str_generated += self.codigo_real[i] + " = "
+            aux = self.procura_cod_tab_sim(self.codigo_real[i]) # Procura a variavel na tab
+            if(aux != -1): # Se ela existir pega o token
+                id_str = self.tabela_simbolos["token"][aux]
+            else: # Se nao existir, coloca o id_str como nao declarada para que seja ignorado na geracao, e deixe o semantico lidar com ele
+                id_str = "nao_declarada"
+            i += 2
+        else:
+            i += 3  
         
+        while(self.entrada[i] != "fim_linha" and id_str != "nao_declarada"):
+            # print(i)
+            if(id_str == "idInt"): # se o cara é int
+                if (self.entrada[i] == "id"):
+                    pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
+
+                    if(self.tabela_simbolos["token"][pos2] == "idFloat"): # se o proximo a ser atribuido a ele é um float
+                        str_generated += "(i32) " + self.tabela_simbolos["cod"][pos2] + " "
+
+                    elif(self.tabela_simbolos["token"][pos2] == "idInt"): # se o proximo a ser atribuido a ele é um int
+                        str_generated += self.tabela_simbolos["cod"][pos2] + " "
+
+                elif (self.entrada[i] == "op_aritmetico" or self.entrada[i] == "int"):
+                    str_generated += self.codigo_real[i] + " "
+
+                elif (self.entrada[i] == "float"):
+                    str_generated += "(i32) " + self.codigo_real[i] + " "
+
+            elif(id_str == "idFloat"): # se o cara é float
+                if (self.entrada[i] == "id"):
+                    pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
+
+                    if(self.tabela_simbolos["token"][pos2] == "idInt"): # se o proximo a ser atribuido a ele é um int
+                        str_generated += "(f64) " + self.tabela_simbolos["cod"][pos2] + " "
+
+                    elif(self.tabela_simbolos["token"][pos2] == "idFloat"): # se o proximo a ser atribuido a ele é um float
+                        str_generated += self.tabela_simbolos["cod"][pos2] + " "
+
+                elif (self.entrada[i] == "op_aritmetico" or self.entrada[i] == "float" or self.entrada[i] == "int"):
+                    str_generated += self.codigo_real[i] + " "
+
+            elif(id_str == "idBoolean"): # se o cara é booleano
+                if (self.entrada[i] == "id"):
+                    pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
+
+                    if(self.tabela_simbolos["token"][pos2] == "idBoolean"): # se o proximo a ser atribuido a ele é um booleano
+                        str_generated += self.tabela_simbolos["cod"][pos2] + " "
+
+                elif (self.entrada[i] == "and" or self.entrada[i] == "or" or self.entrada[i] == "int"):
+                    str_generated += self.codigo_real[i] + " "
+                    
+            i += 1
+
+        str_generated += "\n"
+        return str_generated
 
     def read_file(self, file_name):
         with open(file_name, mode='r', newline='', encoding='utf-8') as arquivo_csv:
@@ -147,7 +221,7 @@ class Sintatico:
         
         linha = 1
         laco = 0
-        laco_saida = 0;
+        laco_saida = 0
         temp = 0 # Variavel utilizada para geracao de cod
         codAsString = "" # String para armazenar o cod gerado
 
@@ -175,41 +249,19 @@ class Sintatico:
 
             topo = self.entrada[posi_entrada] if len(self.entrada) != 0 else "solucao"
 
-            #print("Entrada -> ", self.entrada)
-            #print("Cod real -> ", self.codigo_real, "\n")
-            #print(self.tabela_simbolos)
+            # print("Tab -> ", self.tabela_simbolos)
+            # print("Entrada -> ", self.entrada)
+            # print("Cod real -> ", self.codigo_real, "\n")
             '''
             Entrada ->  ['for', 'id', 'atribuicao', 'int', 'virgula', 'id', 'op_relacional', 'int', 'virgula', 'id', 'incremento', 'col_esq', 'idInt', 'id', 'atribuicao', 'int', 'fim_linha', 'idInt', 'id', 'atribuicao', 'int', 'fim_linha', 'id', 'atribuicao', 'id', 'op_aritmetico', 'id', 'fim_linha', 'col_dir', 'fim_linha', '$']
             Cod real ->  ['for', 'i', ':=', '0', ',', 'i', '<', '20', ',', 'i', '++', '{', '\n', 'int', 'x', ':=', '2', ';', '\n', 'int', 'mult', ':=', '23', ';', '\n', 'x', ':=', 'x', '*', 'mult', ';', '\n', '}', ';', '\n', '\n', '\n']
             '''
 
             # Geracao de Cod.
-            if(len(self.codigo_real) and self.codigo_real[0] != "ja_computado"): # Declara e ja atribui valor
-                if(self.entrada[0] == "idInt" and self.entrada[2] == "atribuicao"):
-                    codAsString += self.codigo_real[1] + ": " + "i32 = " + self.codigo_real[3] + "\n"
+            if(len(self.codigo_real) and self.codigo_real[0] != "ja_computado"):
 
-                if(self.entrada[0] == "idFloat" and self.entrada[2] == "atribuicao"):
-                    codAsString += self.codigo_real[1] + ": " + "f64 = " + self.codigo_real[3] + "\n"
-
-                if(self.entrada[0] == "idBoolean" and self.entrada[2] == "atribuicao"):
-                    codAsString += self.codigo_real[1] + ": " + "bool = " + self.codigo_real[3] + "\n"
-
-                if(self.entrada[0] == "idString" and self.entrada[2] == "atribuicao"):
-                    codAsString += "Declaracao de string! ainda nao resolvida" + "\n"
-
-                if(self.entrada[0] == "id"): # Atribuicao de valor
-                    pos = self.procura_cod_tab_sim(self.codigo_real[0])
-                    if(self.tabela_simbolos["token"][pos] == "idInt" and self.entrada[1] == "atribuicao"):
-                        codAsString += self.codigo_real[0] + ": " + "i32 = " + self.codigo_real[2] + "\n"
-
-                    if(self.tabela_simbolos["token"][pos] == "idFloat" and self.entrada[1] == "atribuicao"):
-                        codAsString += self.codigo_real[0] + ": " + "f64 = " + self.codigo_real[2] + "\n"
-
-                    if(self.tabela_simbolos["token"][pos] == "idBoolean" and self.entrada[1] == "atribuicao"):
-                        codAsString += self.codigo_real[0] + ": " + "bool = " + self.codigo_real[2] + "\n"
-
-                    if(self.tabela_simbolos["token"][pos] == "idString" and self.entrada[1] == "atribuicao"):
-                        codAsString += "Declaracao de string! ainda nao resolvida" + "\n"  
+                if(len(self.codigo_real) > 3 and (self.entrada[2] == "atribuicao" or self.entrada[1] == "atribuicao") and "id" in self.entrada[0]): # Basicamente verifica se o local onde ele esta é realmente uma atribuicao e nao é nada como "b :="
+                    codAsString += self.generate_atribuicao(0)
 
                 if(self.entrada[0] == "col_dir" and self.entrada[1] == "fim_linha" ):   
                     if laco != 0:      
@@ -228,6 +280,7 @@ class Sintatico:
                     codAsString += "IF T"+str(laco_saida)+" goto loop\n"
                     codAsString += "end: \n" + "  goto end \n"
                     laco_saida -=2
+
             # Semantico
             if(len(self.codigo_real) and self.codigo_real[0] != "ja_computado"): # Se ainda tem codigo e ele ainda nao foi computado
                 if(self.entrada[0] == "idInt" or self.entrada[0] == "idFloat" or self.entrada[0] == "idBoolean" or self.entrada[0] == "idString"): # Se o codigo for uma declaracao
@@ -396,8 +449,9 @@ class Sintatico:
                     break
 
         if(erro == 0):
-                with open("cod.txt", "w") as file:
-                    file.write(codAsString)
+            with open("cod.txt", "w") as file:
+                file.write(codAsString)
+            print("Codigo Gerado!")
 
 my_lex = Automato()  
 my_lex.read_file("cod_teste2.txt")
