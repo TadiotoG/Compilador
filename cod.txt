@@ -1,27 +1,4 @@
-a: i32 = (i32) 2.1 
-c: f64 = 2.5 
-h: i32 = a 
-g: f64 = 1 
-j: bool = 1 or 0 
-j = 1 and 1 
-loop: 
-unio: i32 = 0 
-loop: 
-  T1 : i32 = T1 + 1
-  T2 : bool = T1 < 20
-  IF T2 goto loop
-x: i32 = 2 
-mult: i32 = 23 
-x = x * mult 
-loop: 
-  T3 : i32 = T3 + 1
-  T4 : bool = T3 < 20
-  IF T4 goto loop
-end: 
-  goto end 
-end: 
-  goto end 
-T2 : bool = T1 > 2
-IF T2 goto loop
-end: 
-  goto end 
+t1: f64 = (f64)2.5*(f64)3
+t2: f64 = (f64)4*(f64)20
+t3: f64 = (f64)t1*(f64)42
+c: i32 = (f64)t3

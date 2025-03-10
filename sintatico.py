@@ -153,51 +153,103 @@ class Sintatico:
         else:
             i += 3  
         
+        # linha_inteira = {
+        #     "cod":[],
+        #     "token":[]
+        # }
+        linha_inteira = []
         while(self.entrada[i] != "fim_linha" and id_str != "nao_declarada"):
-            # print(i)
-            if(id_str == "idInt"): # se o cara é int
-                if (self.entrada[i] == "id"):
-                    pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
+            # linha_inteira["cod"].append(self.codigo_real[i])
+            # linha_inteira["token"].append(self.codigo_real[i])
+            linha_inteira.append(self.codigo_real[i])
+            # if(id_str == "idInt"): # se o cara é int
+            #     if (self.entrada[i] == "id"):
+            #         pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
 
-                    if(self.tabela_simbolos["token"][pos2] == "idFloat"): # se o proximo a ser atribuido a ele é um float
-                        str_generated += "(i32) " + self.tabela_simbolos["cod"][pos2] + " "
+            #         if(self.tabela_simbolos["token"][pos2] == "idFloat"): # se o proximo a ser atribuido a ele é um float
+            #             str_generated += "(i32) " + self.tabela_simbolos["cod"][pos2] + " "
 
-                    elif(self.tabela_simbolos["token"][pos2] == "idInt"): # se o proximo a ser atribuido a ele é um int
-                        str_generated += self.tabela_simbolos["cod"][pos2] + " "
+            #         elif(self.tabela_simbolos["token"][pos2] == "idInt"): # se o proximo a ser atribuido a ele é um int
+            #             str_generated += self.tabela_simbolos["cod"][pos2] + " "
 
-                elif (self.entrada[i] == "op_aritmetico" or self.entrada[i] == "int"):
-                    str_generated += self.codigo_real[i] + " "
+            #     elif (self.entrada[i] == "op_aritmetico" or self.entrada[i] == "int"):
+            #         str_generated += self.codigo_real[i] + " "
 
-                elif (self.entrada[i] == "float"):
-                    str_generated += "(i32) " + self.codigo_real[i] + " "
+            #     elif (self.entrada[i] == "float"):
+            #         str_generated += "(i32) " + self.codigo_real[i] + " "
 
-            elif(id_str == "idFloat"): # se o cara é float
-                if (self.entrada[i] == "id"):
-                    pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
+            # elif(id_str == "idFloat"): # se o cara é float
+            #     if (self.entrada[i] == "id"):
+            #         pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
 
-                    if(self.tabela_simbolos["token"][pos2] == "idInt"): # se o proximo a ser atribuido a ele é um int
-                        str_generated += "(f64) " + self.tabela_simbolos["cod"][pos2] + " "
+            #         if(self.tabela_simbolos["token"][pos2] == "idInt"): # se o proximo a ser atribuido a ele é um int
+            #             str_generated += "(f64) " + self.tabela_simbolos["cod"][pos2] + " "
 
-                    elif(self.tabela_simbolos["token"][pos2] == "idFloat"): # se o proximo a ser atribuido a ele é um float
-                        str_generated += self.tabela_simbolos["cod"][pos2] + " "
+            #         elif(self.tabela_simbolos["token"][pos2] == "idFloat"): # se o proximo a ser atribuido a ele é um float
+            #             str_generated += self.tabela_simbolos["cod"][pos2] + " "
 
-                elif (self.entrada[i] == "op_aritmetico" or self.entrada[i] == "float" or self.entrada[i] == "int"):
-                    str_generated += self.codigo_real[i] + " "
+            #     elif (self.entrada[i] == "op_aritmetico" or self.entrada[i] == "float" or self.entrada[i] == "int"):
+            #         str_generated += self.codigo_real[i] + " "
 
-            elif(id_str == "idBoolean"): # se o cara é booleano
-                if (self.entrada[i] == "id"):
-                    pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
+            # elif(id_str == "idBoolean"): # se o cara é booleano
+            #     if (self.entrada[i] == "id"):
+            #         pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
 
-                    if(self.tabela_simbolos["token"][pos2] == "idBoolean"): # se o proximo a ser atribuido a ele é um booleano
-                        str_generated += self.tabela_simbolos["cod"][pos2] + " "
+            #         if(self.tabela_simbolos["token"][pos2] == "idBoolean"): # se o proximo a ser atribuido a ele é um booleano
+            #             str_generated += self.tabela_simbolos["cod"][pos2] + " "
 
-                elif (self.entrada[i] == "and" or self.entrada[i] == "or" or self.entrada[i] == "int"):
-                    str_generated += self.codigo_real[i] + " "
+            #     elif (self.entrada[i] == "and" or self.entrada[i] == "or" or self.entrada[i] == "int"):
+            #         str_generated += self.codigo_real[i] + " "
                     
             i += 1
+        # str_generated += "\n"
 
-        str_generated += "\n"
-        return str_generated
+        new_str = ""
+        ultimo_t = ""
+        mult = 0
+        which_t = 1
+        if(id_str == "idBoolean"):
+            while mult < len(linha_inteira) - 2:
+                if(linha_inteira[mult+1] == "and" or linha_inteira[mult+1] == "or"):
+                    new_str += "t" + str(which_t) + ": bool = " + linha_inteira[mult] + linha_inteira[mult+1] + linha_inteira[mult+2] + "\n"
+                    ultimo_t = "t" + str(which_t)
+                    which_t += 1
+                    linha_inteira[mult] = "t1"
+                    linha_inteira.pop(mult+2)
+                    linha_inteira.pop(mult+1)
+                    mult -= 2
+                mult += 1
+
+        if(id_str == "idInt" or id_str == "idFloat"):
+            while mult < len(linha_inteira) - 2:
+                if(linha_inteira[mult+1] == "*" or linha_inteira[mult+1] == "/"):
+                    new_str += "t" + str(which_t) + ": f64 = " + "(f64)" + linha_inteira[mult] + linha_inteira[mult+1] + "(f64)" + linha_inteira[mult+2] + "\n"
+                    ultimo_t = "t" + str(which_t)
+                    which_t += 1
+                    linha_inteira[mult] = "t1"
+                    linha_inteira.pop(mult+2)
+                    linha_inteira.pop(mult+1)
+                    mult -= 2
+                mult += 1
+
+            while mult < len(linha_inteira) - 2:
+                if(linha_inteira[mult+1] == "+" or linha_inteira[mult+1] == "-"):
+                    new_str += "t" + str(which_t) + ": f64 = " + "(f64)" + linha_inteira[mult] + linha_inteira[mult+1] + "(f64)" + linha_inteira[mult+2] + "\n"
+                    ultimo_t = "t" + str(which_t)
+                    which_t += 1
+                    linha_inteira[mult] = "t" + str(which_t)
+                    linha_inteira.pop(mult+2)
+                    linha_inteira.pop(mult+1)
+                    mult -= 2
+                mult += 1
+
+        if(str_generated[3] == "i"):
+            new_str += str_generated + "(f64)" + ultimo_t
+        else:
+            new_str += str_generated + ultimo_t
+        # print("NEW_STR -> ", new_str)
+    
+        return new_str
 
     def read_file(self, file_name):
         with open(file_name, mode='r', newline='', encoding='utf-8') as arquivo_csv:
