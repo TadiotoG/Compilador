@@ -1,4 +1,16 @@
-t1: f64 = (f64)2.5*(f64)3
-t2: f64 = (f64)4*(f64)20
-t3: f64 = (f64)t1*(f64)42
-c: i32 = (f64)t3
+t1: bool = 1 and 0
+t2: bool = t1 and 1
+t3: bool = t2 and 1
+c: bool = t3
+x: i32 = (i32)4
+pot: i32 = 4
+mult = x
+i: i32 = (i32)0
+loop: 
+  T1 : i32 = T1 + 1
+  T2 : bool = T1 < pot
+  IF T2 goto loop
+t1: f64 = (f64)x * (f64)mult
+x = t1
+end: 
+  goto end 

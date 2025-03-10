@@ -159,96 +159,57 @@ class Sintatico:
         # }
         linha_inteira = []
         while(self.entrada[i] != "fim_linha" and id_str != "nao_declarada"):
-            # linha_inteira["cod"].append(self.codigo_real[i])
-            # linha_inteira["token"].append(self.codigo_real[i])
-            linha_inteira.append(self.codigo_real[i])
-            # if(id_str == "idInt"): # se o cara é int
-            #     if (self.entrada[i] == "id"):
-            #         pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
-
-            #         if(self.tabela_simbolos["token"][pos2] == "idFloat"): # se o proximo a ser atribuido a ele é um float
-            #             str_generated += "(i32) " + self.tabela_simbolos["cod"][pos2] + " "
-
-            #         elif(self.tabela_simbolos["token"][pos2] == "idInt"): # se o proximo a ser atribuido a ele é um int
-            #             str_generated += self.tabela_simbolos["cod"][pos2] + " "
-
-            #     elif (self.entrada[i] == "op_aritmetico" or self.entrada[i] == "int"):
-            #         str_generated += self.codigo_real[i] + " "
-
-            #     elif (self.entrada[i] == "float"):
-            #         str_generated += "(i32) " + self.codigo_real[i] + " "
-
-            # elif(id_str == "idFloat"): # se o cara é float
-            #     if (self.entrada[i] == "id"):
-            #         pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
-
-            #         if(self.tabela_simbolos["token"][pos2] == "idInt"): # se o proximo a ser atribuido a ele é um int
-            #             str_generated += "(f64) " + self.tabela_simbolos["cod"][pos2] + " "
-
-            #         elif(self.tabela_simbolos["token"][pos2] == "idFloat"): # se o proximo a ser atribuido a ele é um float
-            #             str_generated += self.tabela_simbolos["cod"][pos2] + " "
-
-            #     elif (self.entrada[i] == "op_aritmetico" or self.entrada[i] == "float" or self.entrada[i] == "int"):
-            #         str_generated += self.codigo_real[i] + " "
-
-            # elif(id_str == "idBoolean"): # se o cara é booleano
-            #     if (self.entrada[i] == "id"):
-            #         pos2 = self.procura_cod_tab_sim(self.codigo_real[i])
-
-            #         if(self.tabela_simbolos["token"][pos2] == "idBoolean"): # se o proximo a ser atribuido a ele é um booleano
-            #             str_generated += self.tabela_simbolos["cod"][pos2] + " "
-
-            #     elif (self.entrada[i] == "and" or self.entrada[i] == "or" or self.entrada[i] == "int"):
-            #         str_generated += self.codigo_real[i] + " "
-                    
+            linha_inteira.append(self.codigo_real[i]) # Só para pegar a linha toda fora a declaracao                  
             i += 1
-        # str_generated += "\n"
 
         new_str = ""
         ultimo_t = ""
         mult = 0
         which_t = 1
         if(id_str == "idBoolean"):
-            while mult < len(linha_inteira) - 2:
-                if(linha_inteira[mult+1] == "and" or linha_inteira[mult+1] == "or"):
-                    new_str += "t" + str(which_t) + ": bool = " + linha_inteira[mult] + linha_inteira[mult+1] + linha_inteira[mult+2] + "\n"
-                    ultimo_t = "t" + str(which_t)
-                    which_t += 1
-                    linha_inteira[mult] = "t1"
+            while mult < len(linha_inteira) - 1:
+                # print("Linha inteira -> ", linha_inteira)
+                if(linha_inteira[mult+1] == "and" or linha_inteira[mult+1] == "or" or linha_inteira[mult+1] == ">" or linha_inteira[mult+1] == "<" or linha_inteira[mult+1] == "==" or linha_inteira[mult+1] == "!=" or linha_inteira[mult+1] == "<=" or linha_inteira[mult+1] == ">="):
+                    new_str += "t" + str(which_t) + ": bool = " + linha_inteira[mult] + " " + linha_inteira[mult+1] + " " + linha_inteira[mult+2] + "\n"
+                    linha_inteira[mult] = "t" + str(which_t)
                     linha_inteira.pop(mult+2)
                     linha_inteira.pop(mult+1)
+                    which_t += 1 # CONTADOR DAS TEMPORARIAS
                     mult -= 2
                 mult += 1
 
         if(id_str == "idInt" or id_str == "idFloat"):
-            while mult < len(linha_inteira) - 2:
+            while mult < len(linha_inteira) - 1:
+                # print("Linha inteira -> ", linha_inteira)
                 if(linha_inteira[mult+1] == "*" or linha_inteira[mult+1] == "/"):
-                    new_str += "t" + str(which_t) + ": f64 = " + "(f64)" + linha_inteira[mult] + linha_inteira[mult+1] + "(f64)" + linha_inteira[mult+2] + "\n"
-                    ultimo_t = "t" + str(which_t)
-                    which_t += 1
-                    linha_inteira[mult] = "t1"
-                    linha_inteira.pop(mult+2)
-                    linha_inteira.pop(mult+1)
-                    mult -= 2
-                mult += 1
-
-            while mult < len(linha_inteira) - 2:
-                if(linha_inteira[mult+1] == "+" or linha_inteira[mult+1] == "-"):
-                    new_str += "t" + str(which_t) + ": f64 = " + "(f64)" + linha_inteira[mult] + linha_inteira[mult+1] + "(f64)" + linha_inteira[mult+2] + "\n"
-                    ultimo_t = "t" + str(which_t)
-                    which_t += 1
+                    new_str += "t" + str(which_t) + ": f64 = " + "(f64)" + linha_inteira[mult] + " " + linha_inteira[mult+1] + " " + "(f64)" + linha_inteira[mult+2] + "\n"
                     linha_inteira[mult] = "t" + str(which_t)
                     linha_inteira.pop(mult+2)
                     linha_inteira.pop(mult+1)
+                    which_t += 1 # CONTADOR DAS TEMPORARIAS
+                    mult -= 2
+                mult += 1
+
+            while mult < len(linha_inteira) - 1:
+                # print("Linha inteira -> ", linha_inteira)
+                if(linha_inteira[mult+1] == "+" or linha_inteira[mult+1] == "-"):
+                    new_str += "t" + str(which_t) + ": f64 = " + "(f64)" + linha_inteira[mult] + " " + linha_inteira[mult+1] + " " + "(f64)" + linha_inteira[mult+2] + "\n"
+                    linha_inteira[mult] = "t" + str(which_t)
+                    linha_inteira.pop(mult+2)
+                    linha_inteira.pop(mult+1)
+                    which_t += 1 # CONTADOR DAS TEMPORARIAS
                     mult -= 2
                 mult += 1
 
         if(str_generated[3] == "i"):
-            new_str += str_generated + "(f64)" + ultimo_t
+            new_str += str_generated + "(i32)"
         else:
-            new_str += str_generated + ultimo_t
-        # print("NEW_STR -> ", new_str)
+            new_str += str_generated
+
+        for resto in linha_inteira:
+            new_str += resto
     
+        new_str += '\n'
         return new_str
 
     def read_file(self, file_name):
@@ -311,7 +272,7 @@ class Sintatico:
 
             # Geracao de Cod.
             if(len(self.codigo_real) and self.codigo_real[0] != "ja_computado"):
-
+                # print("Self entrada -> ", self.entrada
                 if(len(self.codigo_real) > 3 and (self.entrada[2] == "atribuicao" or self.entrada[1] == "atribuicao") and "id" in self.entrada[0]): # Basicamente verifica se o local onde ele esta é realmente uma atribuicao e nao é nada como "b :="
                     codAsString += self.generate_atribuicao(0)
 
@@ -506,7 +467,7 @@ class Sintatico:
             print("Codigo Gerado!")
 
 my_lex = Automato()  
-my_lex.read_file("cod_teste2.txt")
+my_lex.read_file("cod_teste.txt")
 my_lex.analyzes_code()
 
 tokens_solo = [i[1] for i in my_lex.tokens if i[1] != "ContraBarraN" and i[1] != "comentario"]
