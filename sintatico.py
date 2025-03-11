@@ -289,11 +289,12 @@ class Sintatico:
                         else: 
                             codAsString += "cond"+str(laco_if)+":\n"
                             laco_if -= 2
-                            #codAsString += "end: \n" + "  goto end \n"
+                            codAsString += "end: \n" + "  goto end \n"
                 
                 elif(self.entrada[0] == "col_dir" and self.entrada[1] == "else"):
+                    codAsString += "end: \n" + "  goto end \n"
                     codAsString += "cond"+str(laco_if)+":\n"
-                    codAsString += "ElSE:\n"   
+                    #codAsString += "ElSE:\n"   
 
                 elif(self.entrada[0] == "col_dir" and self.entrada[1] == "while"):
                     print(self.codigo_real)
