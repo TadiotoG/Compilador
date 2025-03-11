@@ -6,11 +6,34 @@ x: i32 = (i32)4
 pot: i32 = 4
 mult = x
 i: i32 = (i32)0
-loop: 
-  T1 : i32 = T1 + 1
-  T2 : bool = T1 < pot
-  IF T2 goto loop
-t1: f64 = (f64)x * (f64)mult
-x = t1
+loop0: 
+  t1 : i32 = t1 + 1
+  t2 : bool = t1 < pot
+t3: f64 = (f64)x * (f64)mult
+x = t3
+  IF t2 goto loop0
 end: 
   goto end 
+loop0: 
+t1: f64 = (f64)x * (f64)mult
+x = t1
+t2 : bool = t1 < pot
+IF t2 goto loop0
+end: 
+  goto end 
+x: i32 = (i32)0
+t1 : bool = x > 100
+IF t1 goto cond1
+goto cond2
+cond1:
+x = 20
+cond2:
+t1 : bool = x > 100
+IF t1 goto cond1
+goto cond2
+cond1:
+x = 1
+cond2:
+ElSE:
+x = 2
+x = 10

@@ -15,8 +15,10 @@ for i := 0 , i < 20, i++ {
 };
 int x := 0;
 if x > 100 {
+    x := 1;
     output("Numero maior que 100");
 } else {
+    x := 2;
     output("Numero menor que 100");
 x := 10;
 };

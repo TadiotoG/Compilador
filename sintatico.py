@@ -125,7 +125,7 @@ class Sintatico:
                     i += 1
             return 0
     
-    def generate_atribuicao(self, i):
+    def generate_atribuicao(self, i, valorinicial):
         # str_generated = self.codigo_real[i]
         str_generated = ""
         id_str = self.entrada[i]
@@ -165,7 +165,7 @@ class Sintatico:
         new_str = ""
         ultimo_t = ""
         mult = 0
-        which_t = 1
+        which_t = valorinicial
         if(id_str == "idBoolean"):
             while mult < len(linha_inteira) - 1:
                 # print("Linha inteira -> ", linha_inteira)
@@ -201,6 +201,7 @@ class Sintatico:
                     mult -= 2
                 mult += 1
 
+
         if(str_generated[3] == "i"):
             new_str += str_generated + "(i32)"
         else:
@@ -235,6 +236,7 @@ class Sintatico:
         linha = 1
         laco = 0
         laco_saida = 0
+        laco_if = 0
         temp = 0 # Variavel utilizada para geracao de cod
         codAsString = "" # String para armazenar o cod gerado
 
@@ -274,13 +276,24 @@ class Sintatico:
             if(len(self.codigo_real) and self.codigo_real[0] != "ja_computado"):
                 # print("Self entrada -> ", self.entrada
                 if(len(self.codigo_real) > 3 and (self.entrada[2] == "atribuicao" or self.entrada[1] == "atribuicao") and "id" in self.entrada[0]): # Basicamente verifica se o local onde ele esta é realmente uma atribuicao e nao é nada como "b :="
-                    codAsString += self.generate_atribuicao(0)
-
+                    if laco_saida != 0 :
+                        codAsString += self.generate_atribuicao(0,(laco_saida+1))
+                    else:
+                        codAsString += self.generate_atribuicao(0,1)
                 if(self.entrada[0] == "col_dir" and self.entrada[1] == "fim_linha" ):   
                     if laco != 0:      
-                        if(self.lista_laco[(laco)-1] != "if"):                       
+                        if(self.lista_laco[(laco)-1] != "if"): 
+                            codAsString += "  IF t"+str(laco_saida)+" goto loop" +str(laco_saida-2)+"\n"             
                             codAsString += "end: \n" + "  goto end \n"
                             laco_saida -=2
+                        else: 
+                            codAsString += "cond"+str(laco_if)+":\n"
+                            laco_if -= 2
+                            #codAsString += "end: \n" + "  goto end \n"
+                
+                elif(self.entrada[0] == "col_dir" and self.entrada[1] == "else"):
+                    codAsString += "cond"+str(laco_if)+":\n"
+                    codAsString += "ElSE:\n"   
 
                 elif(self.entrada[0] == "col_dir" and self.entrada[1] == "while"):
                     print(self.codigo_real)
@@ -289,8 +302,8 @@ class Sintatico:
                         posi = 4
                     else: 
                         posi= 3
-                    codAsString += "T"+str(laco_saida)+" : bool = T"+str(laco_saida-1)+" " + self.codigo_real[posi] + " " + self.codigo_real[(posi+1)] + "\n"
-                    codAsString += "IF T"+str(laco_saida)+" goto loop\n"
+                    codAsString += "t"+str(laco_saida)+" : bool = t"+str(laco_saida-1)+" " + self.codigo_real[posi] + " " + self.codigo_real[(posi+1)] + "\n"
+                    codAsString += "IF t"+str(laco_saida)+" goto loop" +str(laco_saida-2)+"\n"
                     codAsString += "end: \n" + "  goto end \n"
                     laco_saida -=2
 
@@ -347,7 +360,7 @@ class Sintatico:
                         self.tabela_simbolos["utilizada"][pos] = True
                         if (self.entrada[0] == "for" ):
                             #print(self.entrada)
-                            codAsString += "loop: \n" 
+                            codAsString += "loop"+str(laco_saida)+": \n" 
                             if (self.tabela_simbolos["token"][pos] != "idString" and self.tabela_simbolos["token"][pos] != "idBoolean"):
 
                                 if (self.entrada[3] == "float" and self.tabela_simbolos["token"][pos] == "idInt"):
@@ -361,30 +374,37 @@ class Sintatico:
 
                                     if(self.tabela_simbolos["token"][pos] == "idInt"):
                                         if (self.entrada[10] == "incremento"):
-                                            codAsString += "  T"+str(laco_saida)+" : i32 = T"+str(laco_saida)+" + 1" + "\n"
+                                            codAsString += "  t"+str(laco_saida)+" : i32 = t"+str(laco_saida)+" + 1" + "\n"
                                         else:
-                                            codAsString += "  T"+str(laco_saida)+": i32 = T"+str(laco_saida)+" - 1" + "\n"
+                                            codAsString += "  t"+str(laco_saida)+": i32 = t"+str(laco_saida)+" - 1" + "\n"
 
                                     if(self.tabela_simbolos["token"][pos] == "idFloat"):
                                         if (self.entrada[10] == "incremento"):
-                                            codAsString += "  T"+str(laco_saida)+": f64 = T"+str(laco_saida)+" + 1" + "\n"
+                                            codAsString += "  t"+str(laco_saida)+": f64 = t"+str(laco_saida)+" + 1" + "\n"
                                         else:
-                                            codAsString += "  T"+str(laco_saida)+": f64 = T"+str(laco_saida)+" - 1" + "\n"
+                                            codAsString += "  t"+str(laco_saida)+": f64 = t"+str(laco_saida)+" - 1" + "\n"
+                                    
                                     laco_saida += 1
-                                    codAsString += "  T"+str(laco_saida)+" : bool = T"+str(laco_saida-1)+" " + self.codigo_real[6] + " " + self.codigo_real[7] + "\n"
-                                    codAsString += "  IF T"+str(laco_saida)+" goto loop\n"
-
+                                    codAsString += "  t"+str(laco_saida)+" : bool = t"+str(laco_saida-1)+" " + self.codigo_real[6] + " " + self.codigo_real[7] + "\n"
+                            
 
                                     self.lista_laco.append("for") 
                                      
                         else:
                             laco = laco + 1
+                            laco_if += 1
+                            codAsString += "t"+str(laco_if)+" : bool = "+ self.codigo_real[1] +" " + self.codigo_real[2] + " " + self.codigo_real[3] + "\n"
+                            codAsString += "IF t"+str(laco_if)+" goto cond" +str(laco_if)+"\n"
+                            laco_if += 1
+                            codAsString += "goto cond" +str(laco_if)+"\n"
+                            codAsString +=  "cond"+str(laco_if-1)+":\n"
+                            #codAsString += "  t"+str(laco_saida)+" : bool = t"+str(laco_saida-1)+" " + self.codigo_real[6] + " " + self.codigo_real[7] + "\n"
                             self.lista_laco.append("if") 
                             self.codigo_real[1] = "ja_computado"                         
                     self.codigo_real[0] = "ja_computado"
                 
                 elif(self.entrada[0] == "do"):       
-                    codAsString += "loop: \n"  
+                    codAsString += "loop"+str(laco_saida)+": \n" 
                     laco = laco + 1
                     self.lista_laco.append("do") 
                     self.codigo_real[1] = "ja_computado"                         
