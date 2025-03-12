@@ -1,3 +1,5 @@
+![Unioeste](Imagens/logo_unioeste)
+
 # Analisador Semântico e Gerador de Código Intermediário
 
 **Universidade Estadual do Oeste do Paraná**  
