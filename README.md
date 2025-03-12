@@ -1,6 +1,6 @@
 <p align="center">
     <img src="Imagens/logo_unioeste.png" alt="Unioeste" width="200" style="display: inline-block; margin-right: 20px;">
-    <img src="Imagens/capy.png" alt="Capy" width="50" style="display: inline-block;">
+    <img src="Imagens/capy.png" alt="Capy" width="100" style="display: inline-block;">
 </p>
 
 
