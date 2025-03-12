@@ -90,7 +90,7 @@ O Gerador de Código Intermediário deste compilador traduz a representação se
 - **Código Intermediário**                                 
 -`i: i32 = (i32)0`                                
 -`loop0: `  
--` t1 : i32 = t1 + 1` 
+-` t1 : i32 = t1 + 1`   
 -` t2 : bool = t1 < pot`  
 -` t3: f64 = (f64)x * (f64)mult`  
 -` x = t3`      
