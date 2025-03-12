@@ -1,4 +1,4 @@
-<img src="Imagens/logo_unioeste.png" alt="Unioeste" width="100">
+<img src="Imagens/logo_unioeste.png" alt="Unioeste" width="150">
 
 
 # Analisador Semântico e Gerador de Código Intermediário
