@@ -1,4 +1,5 @@
-![Unioeste](Imagens/logo_unioeste.png)
+<img src="Imagens/logo_unioeste.png" alt="Unioeste" width="20">
+
 
 # Analisador Semântico e Gerador de Código Intermediário
 
