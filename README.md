@@ -1,10 +1,10 @@
-# Analisador Semântico
+# Analisador Semântico e Gerador de Código Intermediário
 
 **Universidade Estadual do Oeste do Paraná**  
 **Centro de Ciências Exatas e Tecnológicas**  
 **Colegiado de Ciência da Computação**  
 
-## Disciplina: Compiladores - Parte 3
+## Disciplina: Compiladores
 **Alunos:**  
 - **David Antonio Brocardo**  
 - **Gabriel Tadioto de Oliveira**  
@@ -14,7 +14,11 @@
 ---
 
 ## Introdução
-Este projeto implementa um **Analisador Semântico**, a terceira parte de um compilador. O objetivo principal é verificar a coerência semântica do código-fonte, assegurando a correta declaração e uso de variáveis, compatibilidade de tipos, regras de escopo e integridade da tabela de símbolos.
+
+Este projeto implementa um **Compilador** , abrangendo todas as etapas do processo de compilação: Análise Léxica, Sintática, Semântica e Geração de Código. O objetivo principal é garantir a correta tradução do código-fonte.
+
+## Analisador Semântico
+Verificando a coerência semântica, assegurando a correta declaração e uso de variáveis, compatibilidade de tipos, regras de escopo. integridade da tabela de símbolos e a geração eficiente do código final.
 
 ## Entrada
 O Analisador Semântico recebe como entrada uma lista de tokens extraídos do código-fonte, representados da seguinte forma:
@@ -44,6 +48,9 @@ Garante que cada identificador seja único dentro do seu escopo.
 ### **Uso de variáveis**
 Verifica se todas as variáveis declaradas foram utilizadas no programa.
 
+### **Verificação de Laços**
+Garante que as váriaveis declaradas dentro de laços e condicionais, sejam válidas somente dentro de seu escopo.
+
 ### **Sistema de Tipos**
 Realiza a verificação de compatibilidade entre tipos nas operações matemáticas:
 
@@ -64,42 +71,51 @@ A Tabela de Símbolos é uma estrutura essencial do Analisador Semântico. Suas 
 
 ### **Estrutura da Tabela de Símbolos**
 Cada entrada na tabela de símbolos contém:
-- **Nome ou lexema** (identificador da variável ou procedimento)
-- **Tipo** (Float, Int, Boolean, String)
-- **Escopo** (definição de onde a variável pode ser acessada)
+- **Nome ou lexema (Token)** (identificador da variável ou procedimento)
+- **Código Real** (Código real que o token representa)
+- **Utilizada** (Verificando se a váriavel já foi utilizada)
 
-### **Principais Operações**
-- **Inserir:** Armazena informações das declarações.
-- **Verificar (lookup):** Recupera informação associada a um identificador quando ele é utilizado.
-- **Remover:** Exclui informações de um identificador quando ele não é mais necessário.
 
 ---
 
-## Conclusão
-Este analisador semântico assegura que o programa está semanticamente correto antes da geração do código objeto. Ele verifica a declaração de variáveis, a coerência dos tipos e o escopo dos identificadores, garantindo uma compilação bem-sucedida.
+## Gerador de Código Intermediário
+O Gerador de Código Intermediário deste compilador traduz a representação semântica do código-fonte para a linguagem Extend Three Address Code (ETAC).  Essa etapa tem como objetivo otimizar a transição entre a análise semântica e a geração de código final, garantindo a correta estruturação das operações, alocação de temporários.
 
+### Exemplo de uso
+- **Código Original**           
+-`int i := 0;`                    
+-`for i := 0, i < pot, i++ {`      
+-` x := x * mult;`                
+-`};`                               
+- **Código Intermediário**                                 
+-`i: i32 = (i32)0`                                
+-`loop0: `  
+-` t1 : i32 = t1 + 1` 
+-` t2 : bool = t1 < pot`  
+-` t3: f64 = (f64)x * (f64)mult`  
+-` x = t3`      
+-`IF t2 goto loop0`                     
 ---
+
 
 ## Como Executar
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/TadiotoG/Compilador.git 
    ```
 2. Acesse o diretório do projeto:
    ```bash
-   cd seu-repositorio
+   cd Compilador
    ```
 3. Execute o analisador:
    ```bash
-   python analisador_semantico.py
+   python compilador.py
    ```
 
 ---
 
 ## Tecnologias Utilizadas
 - **Python**
-- **Algoritmos de Compiladores**
-- **Análise Semântica**
 
 
 

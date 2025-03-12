@@ -1,6 +1,6 @@
-float carlinhos := 2;
-carlinhos := carlinhos * 20.9;
-int jacu := 202 + 20;
+float multp := 2;
+multp := multp * 20.9;
+int soma := 202 + 20;
 int i;
 boolean j := 1;
 j = 1;

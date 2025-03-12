@@ -483,7 +483,7 @@ class Sintatico:
                     break
 
         if(erro == 0):
-            with open("cod.txt", "w") as file:
+            with open("codigo_intermediario.txt", "w") as file:
                 file.write(codAsString)
             print("Codigo Gerado!")
 
