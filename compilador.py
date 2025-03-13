@@ -264,14 +264,6 @@ class Sintatico:
 
             topo = self.entrada[posi_entrada] if len(self.entrada) != 0 else "solucao"
 
-            # print("Tab -> ", self.tabela_simbolos)
-            # print("Entrada -> ", self.entrada)
-            # print("Cod real -> ", self.codigo_real, "\n")
-            '''
-            Entrada ->  ['for', 'id', 'atribuicao', 'int', 'virgula', 'id', 'op_relacional', 'int', 'virgula', 'id', 'incremento', 'col_esq', 'idInt', 'id', 'atribuicao', 'int', 'fim_linha', 'idInt', 'id', 'atribuicao', 'int', 'fim_linha', 'id', 'atribuicao', 'id', 'op_aritmetico', 'id', 'fim_linha', 'col_dir', 'fim_linha', '$']
-            Cod real ->  ['for', 'i', ':=', '0', ',', 'i', '<', '20', ',', 'i', '++', '{', '\n', 'int', 'x', ':=', '2', ';', '\n', 'int', 'mult', ':=', '23', ';', '\n', 'x', ':=', 'x', '*', 'mult', ';', '\n', '}', ';', '\n', '\n', '\n']
-            '''
-
             # Geracao de Cod.
             if(len(self.codigo_real) and self.codigo_real[0] != "ja_computado"):
                 # print("Self entrada -> ", self.entrada
@@ -297,7 +289,7 @@ class Sintatico:
                     #codAsString += "ElSE:\n"   
 
                 elif(self.entrada[0] == "col_dir" and self.entrada[1] == "while"):
-                    print(self.codigo_real)
+                    # print(self.codigo_real)
                     laco_saida += 2 # Depois de tiver uma variavel para os registradores da pra so trocar
                     if (self.entrada[2] == "par_esq"):
                         posi = 4
@@ -493,7 +485,5 @@ my_lex.analyzes_code()
 
 tokens_solo = [i[1] for i in my_lex.tokens if i[1] != "ContraBarraN" and i[1] != "comentario"]
 real_code = [i[0] for i in my_lex.tokens if "@" not in i[0]]
-
-# print("Real code ", real_code)
 
 sintatico = Sintatico(tokens_solo, real_code)

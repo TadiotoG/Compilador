@@ -1,3 +1,0 @@
-boolean b := 1 and 0;
-boolean c := 1;
-boolean a := b or c;

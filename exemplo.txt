@@ -1,24 +1,19 @@
 int x;
-x := input();
+x := 4;
 
 float pot;
-pot := input();
+pot := 3;
 
-boolean mult;
-mult := 0; 
+int mult := 0;
 
+int i;
 for i := 0 , i < pot,i++ {
     x := x * mult;
 };
 
-if x > -100 {
-    output("Numero maior que 100");
+if x > 100 {
+    boolean maior_que_100 := 1;
 } else {
 
-    output("Numero menor que 100");
+    boolean maior_que_100 := 0;
 };
-
-output("Valor :");
-output(x);
-@ adfasdasad12312
-output;
